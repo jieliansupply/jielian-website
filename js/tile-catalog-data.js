@@ -64,5 +64,56 @@ window.TILE_CATALOG = [
         image: "images/tile/tile_96615.jpg"
       }
     ]
+  },
+  {
+    id: "superwhite",
+    name: { zh: "超白坯大理石瓷砖 (600×1200)", en: "Super-white Marble Tiles (600×1200)" },
+    desc: {
+      zh: "超白坯大理石瓷砖，600×1200mm 大规格，奶白/纯白/希腊灰等经典花色，适合客厅、厨卫墙面及地面大面积铺贴。",
+      en: "Super-white body marble tiles, large format 600×1200mm, classic colors of milky white, pure white and Greek grey, ideal for large-area flooring and walls in living rooms, kitchens and bathrooms."
+    },
+    image: "images/tile/tile_63L12.jpg",
+    items: [
+      {
+        model: "63L01",
+        color: { zh: "奶白", en: "Milky White" },
+        finish: { zh: "超白坯大理石", en: "Super-white Marble" },
+        size: "600×1200mm",
+        pattern: { zh: "纯色无纹理", en: "Solid Color" },
+        image: "images/tile/tile_63L01.jpg"
+      },
+      {
+        model: "63L00",
+        color: { zh: "纯白", en: "Pure White" },
+        finish: { zh: "超白坯大理石", en: "Super-white Marble" },
+        size: "600×1200mm",
+        pattern: { zh: "纯色无纹理", en: "Solid Color" },
+        image: "images/tile/tile_63L00.jpg"
+      },
+      {
+        model: "63L12",
+        color: { zh: "希腊灰", en: "Greek Grey" },
+        finish: { zh: "超白坯大理石", en: "Super-white Marble" },
+        size: "600×1200mm",
+        pattern: { zh: "无限连纹", en: "Continuous Vein" },
+        image: "images/tile/tile_63L12.jpg"
+      },
+      {
+        model: "63L16",
+        color: { zh: "米白", en: "Off White" },
+        finish: { zh: "超白坯大理石", en: "Super-white Marble" },
+        size: "600×1200mm",
+        pattern: { zh: "无限连纹", en: "Continuous Vein" },
+        image: "images/tile/tile_63L16.jpg"
+      },
+      {
+        model: "63L15",
+        color: { zh: "浅灰白", en: "Light Grey White" },
+        finish: { zh: "超白坯大理石", en: "Super-white Marble" },
+        size: "600×1200mm",
+        pattern: { zh: "无限连纹", en: "Continuous Vein" },
+        image: "images/tile/tile_63L15.jpg"
+      }
+    ]
   }
 ];
