@@ -45,13 +45,15 @@
     });
   });
 
-  /* ---------- 恢复上次语言选择 ---------- */
+  /* ---------- 恢复上次语言选择 / 自动判断浏览器语言 ---------- */
   let savedLang = null;
   try { savedLang = localStorage.getItem("jielian_lang"); } catch (e) {}
   if (savedLang === "zh" || savedLang === "en") {
     applyLang(savedLang);
   } else {
-    applyLang("en");
+    // 根据浏览器语言自动判断：中文环境默认中文，否则英文
+    const nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+    applyLang(nav.indexOf("zh") === 0 ? "zh" : "en");
   }
 
   /* ---------- 滚动高亮当前导航 ---------- */
@@ -86,7 +88,7 @@
     revealEls.forEach(function (el) { el.classList.add("revealed"); });
   }
 
-  /* ---------- 联系表单（前端原型：本地提示，不真正提交） ---------- */
+  /* ---------- 联系表单（提交到 Formspree） ---------- */
   const form = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
   if (form) {
@@ -96,17 +98,49 @@
       const email = form.querySelector("#email").value.trim();
       const message = form.querySelector("#message").value.trim();
 
+      const t = function (k, fallback) {
+        return window.I18N && window.I18N[document.documentElement.lang]
+          ? (window.I18N[document.documentElement.lang][k] || fallback) : fallback;
+      };
+
       if (!name || !email || !message) {
-        formStatus.textContent = window.I18N && window.I18N[document.documentElement.lang]
-          ? window.I18N[document.documentElement.lang].form_fill : "请填写所有必填字段";
+        formStatus.textContent = t("form_fill", "请填写所有必填字段");
         formStatus.style.color = "#cf2e2e";
         return;
       }
-      // 前端原型：仅展示成功提示，不发送真实邮件
-      formStatus.textContent = window.I18N && window.I18N[document.documentElement.lang]
-        ? window.I18N[document.documentElement.lang].form_ok : "感谢您的留言，我们会尽快与您联系！";
-      formStatus.style.color = "#0f9d58";
-      form.reset();
+
+      // 若已配置 Formspree（action 不是占位符），则真实提交
+      const action = form.getAttribute("action") || "";
+      if (action && action.indexOf("YOUR_FORM_ID") === -1) {
+        const btn = form.querySelector("button[type=submit]");
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "…";
+        fetch(action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        }).then(function (res) {
+          if (res.ok) {
+            formStatus.textContent = t("form_ok", "感谢您的留言，我们会尽快与您联系！");
+            formStatus.style.color = "#0f9d58";
+            form.reset();
+          } else {
+            throw new Error("submit failed");
+          }
+        }).catch(function () {
+          formStatus.textContent = t("form_err", "发送失败，请稍后重试或直接邮件联系我们。");
+          formStatus.style.color = "#cf2e2e";
+        }).finally(function () {
+          btn.disabled = false;
+          btn.textContent = original;
+        });
+      } else {
+        // 尚未配置 Formspree：展示提示
+        formStatus.textContent = t("form_ok", "感谢您的留言，我们会尽快与您联系！");
+        formStatus.style.color = "#0f9d58";
+        form.reset();
+      }
     });
   }
 

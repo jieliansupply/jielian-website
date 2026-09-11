@@ -105,7 +105,7 @@ window.I18N = {
     about_pt2_d: "对接中国优质工厂，验厂把关、压价采购",
     about_pt3_t: "定制与 OEM/ODM",
     about_pt3_d: "按需定制、贴牌生产，满足差异化需求",
-    about_img: "📦 产品示意图\n（此处可替换为贵司仓库 / 产品实拍图）",
+    about_img: "产品示意图\n（可替换为仓库 / 产品实拍图）",
     about_badge: "年行业经验\n专业团队",
 
     prod_eyebrow: "我们的产品",
@@ -141,6 +141,7 @@ window.I18N = {
     form_btn: "提交询盘",
     form_fill: "请填写所有必填字段",
     form_ok: "感谢您的留言，我们会尽快与您联系！",
+    form_err: "发送失败，请稍后重试或直接邮件联系我们。",
 
     foot_desc: "Jielian Supply Chain Management (Guangdong) Co., Ltd. — 综合建材供应与一站式采购服务，连接中国优质工厂与全球客户。",
     foot_links: "快速链接",
@@ -183,7 +184,7 @@ window.I18N = {
     about_pt2_d: "Vetted Chinese factories, factory audit and price negotiation",
     about_pt3_t: "Custom & OEM/ODM",
     about_pt3_d: "Customization and private labeling to meet your needs",
-    about_img: "📦 Product Visual\n(Replace with your warehouse / product photos)",
+    about_img: "Product Visual\n(Replace with warehouse / product photos)",,
     about_badge: "Years of Industry\nExperience",
 
     prod_eyebrow: "Our Products",
@@ -220,6 +221,7 @@ window.I18N = {
     form_btn: "Submit Inquiry",
     form_fill: "Please fill in all required fields",
     form_ok: "Thank you! We will contact you soon.",
+    form_err: "Failed to send. Please try again or email us directly.",,
 
     foot_desc: "Jielian Supply Chain Management (Guangdong) Co., Ltd. — comprehensive building materials supply and one-stop sourcing, connecting quality Chinese factories with global customers.",
     foot_links: "Quick Links",
