@@ -115,5 +115,36 @@ window.TILE_CATALOG = [
         image: "images/tile/tile_63L15.jpg"
       }
     ]
+  },
+  {
+    id: "slab",
+    name: { zh: "亮面大板瓷砖 (900×1800)", en: "Glossy Large-format Slabs (900×1800)" },
+    desc: {
+      zh: "900×1800mm 大规格亮面大理石纹瓷砖，黑、白、灰、咖、彩等多系列花色，适合背景墙、客厅、酒店及商业空间大面积铺贴。",
+      en: "900×1800mm large-format glossy marble-look slabs in black, white, grey, brown and color series, ideal for feature walls, living rooms, hotels and commercial spaces."
+    },
+    image: "images/tile/slab/slab_12.jpg",
+    items: [
+      { model: "918YS012", name: { zh: "香雪梅", en: "Xiangxue Plum" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_11.jpg" },
+      { model: "918YS379", name: { zh: "熊猫白", en: "Panda White" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_11.jpg" },
+      { model: "918YS321", name: { zh: "蓝色妖姬", en: "Blue Enchantress" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_11.jpg" },
+      { model: "918YS015", name: { zh: "卡拉金", en: "Cara Gold" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_12.jpg" },
+      { model: "918YS016", name: { zh: "雕刻鱼肚金", en: "Carved Fishbelly Gold" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_12.jpg" },
+      { model: "918YS035", name: { zh: "冷翡翠", en: "Cold Jade" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_12.jpg" },
+      { model: "918YS101", name: { zh: "黑白根", en: "Black White Vein" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_03.jpg" },
+      { model: "918YS315", name: { zh: "卡地亚深咖", en: "Cartier Dark Brown" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_03.jpg" },
+      { model: "918YS304", name: { zh: "雾隐山", en: "Misty Mountain" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_03.jpg" },
+      { model: "918YS332", name: { zh: "黑布林", en: "Black Plum" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_02.jpg" },
+      { model: "918YS309", name: { zh: "砂岩黑", en: "Sandstone Black" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_02.jpg" },
+      { model: "918YS317", name: { zh: "暮光之城", en: "Twilight City" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_02.jpg" },
+      { model: "918YS108", name: { zh: "保加利亚棕", en: "Bulgaria Brown" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_05.jpg" },
+      { model: "918YS394", name: { zh: "保加利亚深灰", en: "Bulgaria Dark Grey" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_05.jpg" },
+      { model: "918YS353", name: { zh: "雪融黑", en: "Snowmelt Black" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_05.jpg" },
+      { model: "918YS103", name: { zh: "纪梵希咖", en: "Givenchy Brown" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_06.jpg" },
+      { model: "918YS115", name: { zh: "枫叶红", en: "Maple Red" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_19.jpg" },
+      { model: "918YS137", name: { zh: "摩卡咖", en: "Mocha Brown" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_19.jpg" },
+      { model: "918YS325", name: { zh: "云彩石", en: "Cloud Stone" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_19.jpg" },
+      { model: "91816", name: { zh: "马尔代夫蓝", en: "Maldives Blue" }, finish: { zh: "亮面", en: "Glossy" }, size: "900×1800mm", image: "images/tile/slab/slab_23.jpg" }
+    ]
   }
 ];

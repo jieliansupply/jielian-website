@@ -83,19 +83,24 @@
         var card = document.createElement("article");
         card.className = "tile-card";
 
+        // 产品名称/花色（兼容 name 与 color 两种字段）
+        var productName = (it.name && (it.name[lang] || it.name.zh)) ||
+                          (it.color && (it.color[lang] || it.color.zh)) || "";
+
         var waText = encodeURIComponent(
           "Hello, I'm interested in your tile model " + it.model +
-          " (" + (it.color[lang] || it.color.zh) + "). Please send more details."
+          (productName ? " (" + productName + ")" : "") + ". Please send more details."
         );
         var waLink = WHATSAPP + "?text=" + waText;
 
-        var rows = [
-          [I18N[lang].model, it.model],
-          [I18N[lang].color, it.color[lang] || it.color.zh],
-          [I18N[lang].finish, it.finish[lang] || it.finish.zh],
-          [I18N[lang].size, it.size],
-          [I18N[lang].pattern, it.pattern[lang] || it.pattern.zh]
-        ];
+        // 动态拼装规格行（跳过不存在的字段）
+        var rows = [];
+        rows.push([I18N[lang].model, it.model]);
+        if (it.name) rows.push([I18N[lang].color, it.name[lang] || it.name.zh]);
+        if (it.color) rows.push([I18N[lang].color, it.color[lang] || it.color.zh]);
+        if (it.finish) rows.push([I18N[lang].finish, it.finish[lang] || it.finish.zh]);
+        if (it.size) rows.push([I18N[lang].size, it.size]);
+        if (it.pattern) rows.push([I18N[lang].pattern, it.pattern[lang] || it.pattern.zh]);
 
         var rowsHtml = rows.map(function (r) {
           return '<div class="spec-row"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
@@ -107,7 +112,7 @@
             '<span class="tile-model">' + it.model + '</span>' +
           '</div>' +
           '<div class="tile-body">' +
-            '<h3>' + it.model + ' · ' + (it.color[lang] || it.color.zh) + '</h3>' +
+            '<h3>' + it.model + (productName ? ' · ' + productName : '') + '</h3>' +
             '<div class="spec-list">' + rowsHtml + '</div>' +
             '<a class="btn btn-green tile-cta" href="' + waLink + '" target="_blank" rel="noopener">' +
               (I18N[lang].inquiry || "咨询这款") +
