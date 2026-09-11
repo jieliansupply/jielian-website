@@ -247,21 +247,21 @@
       <div class="contact-form" data-reveal>
         <h3 data-lang="form_title">发送询盘</h3>
         <p class="sub" data-lang="form_sub">填写以下信息，我们会尽快与您联系。</p>
-        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <form id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="name" data-lang="form_name">您的姓名 *</label>
               <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required>
             </div>
             <div class="form-group">
-              <label for="email" data-lang="form_email">邮箱 *</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+              <label for="phone" data-lang="form_phone">电话 / WhatsApp</label>
+              <input type="tel" id="phone" name="phone" placeholder="+971 ...">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label for="phone" data-lang="form_phone">电话</label>
-              <input type="tel" id="phone" name="phone" placeholder="+971 ...">
+              <label for="email" data-lang="form_email">邮箱</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
             </div>
             <div class="form-group">
               <label for="country" data-lang="form_country">国家/地区</label>
@@ -272,10 +272,7 @@
             <label for="message" data-lang="form_msg">需求描述 *</label>
             <textarea id="message" name="message" placeholder="请描述您需要的产品、数量、规格等" required></textarea>
           </div>
-          <input type="hidden" name="_subject" value="[询盘] 来自捷链供应链官网的新询盘">
-          <input type="hidden" name="_language" value="zh-CN">
-          <input type="text" name="_gotcha" style="display:none">
-          <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;" data-lang="form_btn">提交询盘</button>
+          <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;" data-lang="form_btn">WhatsApp 联系</button>
           <p class="form-note" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>

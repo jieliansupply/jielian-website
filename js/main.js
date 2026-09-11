@@ -88,7 +88,8 @@
     revealEls.forEach(function (el) { el.classList.add("revealed"); });
   }
 
-  /* ---------- 联系表单（提交到 Formspree） ---------- */
+  /* ---------- 联系表单（跳转 WhatsApp 发送询盘） ---------- */
+  const WHATSAPP_NUMBER = "8618565728237"; // 不带 + 号
   const form = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
   if (form) {
@@ -97,50 +98,37 @@
       const name = form.querySelector("#name").value.trim();
       const email = form.querySelector("#email").value.trim();
       const message = form.querySelector("#message").value.trim();
+      const phone = form.querySelector("#phone").value.trim();
+      const country = form.querySelector("#country").value.trim();
 
       const t = function (k, fallback) {
         return window.I18N && window.I18N[document.documentElement.lang]
           ? (window.I18N[document.documentElement.lang][k] || fallback) : fallback;
       };
 
-      if (!name || !email || !message) {
-        formStatus.textContent = t("form_fill", "请填写所有必填字段");
+      if (!name || !message) {
+        formStatus.textContent = t("form_fill", "请填写姓名与需求描述");
         formStatus.style.color = "#cf2e2e";
         return;
       }
 
-      // 若已配置 Formspree（action 不是占位符），则真实提交
-      const action = form.getAttribute("action") || "";
-      if (action && action.indexOf("YOUR_FORM_ID") === -1) {
-        const btn = form.querySelector("button[type=submit]");
-        const original = btn.textContent;
-        btn.disabled = true;
-        btn.textContent = "…";
-        fetch(action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: { Accept: "application/json" }
-        }).then(function (res) {
-          if (res.ok) {
-            formStatus.textContent = t("form_ok", "感谢您的留言，我们会尽快与您联系！");
-            formStatus.style.color = "#0f9d58";
-            form.reset();
-          } else {
-            throw new Error("submit failed");
-          }
-        }).catch(function () {
-          formStatus.textContent = t("form_err", "发送失败，请稍后重试或直接邮件联系我们。");
-          formStatus.style.color = "#cf2e2e";
-        }).finally(function () {
-          btn.disabled = false;
-          btn.textContent = original;
-        });
-      } else {
-        // 尚未配置 Formspree：展示提示
-        formStatus.textContent = t("form_ok", "感谢您的留言，我们会尽快与您联系！");
-        formStatus.style.color = "#0f9d58";
-        form.reset();
-      }
+      // 组装 WhatsApp 消息内容
+      const lines = [];
+      lines.push(t("wa_greet", "询盘（来自捷链供应链官网）"));
+      lines.push(t("wa_name", "姓名") + ": " + name);
+      if (email) lines.push(t("wa_email", "邮箱") + ": " + email);
+      if (phone) lines.push(t("wa_phone", "电话") + ": " + phone);
+      if (country) lines.push(t("wa_country", "国家/地区") + ": " + country);
+      lines.push("");
+      lines.push(t("wa_req", "需求描述") + ": " + message);
+
+      const text = lines.join("\n");
+      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+
+      // 新窗口打开 WhatsApp
+      window.open(url, "_blank", "noopener");
+      formStatus.textContent = t("form_ok", "已为您打开 WhatsApp，发送即可联系我们！");
+      formStatus.style.color = "#0f9d58";
     });
   }
 
