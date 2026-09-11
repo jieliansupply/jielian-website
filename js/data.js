@@ -5,12 +5,6 @@
 /* ---------- 产品分类（11 大类，参照建材供应商行业结构） ---------- */
 window.PRODUCTS = [
   {
-    key: "sanitary",
-    icon: "bath",
-    zh: { name: "卫浴洁具", desc: "浴室五金配件、花洒、洗手盆、浴缸、地漏、厨房龙头等全系列卫浴产品。", tags: ["花洒", "洗手盆", "龙头", "马桶", "浴缸"] },
-    en: { name: "Plumbing & Sanitary", desc: "Bathroom fittings, shower accessories, wash basins, baths, floor drains, kitchen faucets and more.", tags: ["Showers", "Basins", "Faucets", "WC", "Bathtubs"] }
-  },
-  {
     key: "hardware",
     icon: "tool",
     zh: { name: "五金紧固件", desc: "不锈钢/碳钢/镀锌紧固件，螺栓、螺母、螺钉、弹簧垫圈、螺纹杆、膨胀螺栓等。", tags: ["螺栓", "螺母", "螺钉", "垫圈", "螺纹杆"] },
@@ -152,7 +146,7 @@ window.I18N = {
     foot_desc: "Jielian Supply Chain Management (Guangdong) Co., Ltd. — 综合建材供应与一站式采购服务，连接中国优质工厂与全球客户。",
     foot_links: "快速链接",
     foot_prod: "产品",
-    foot_p1: "卫浴洁具",
+    foot_p1: "灯具照明",
     foot_p2: "五金紧固件",
     foot_p3: "电气设备",
     foot_p4: "水暖管道",
@@ -190,7 +184,7 @@ window.I18N = {
     about_pt2_d: "Vetted Chinese factories, factory audit and price negotiation",
     about_pt3_t: "Custom & OEM/ODM",
     about_pt3_d: "Customization and private labeling to meet your needs",
-    about_img: "Product Visual\n(Replace with warehouse / product photos)",,
+    about_img: "Product Visual\n(Replace with warehouse / product photos)",
     about_badge: "Years of Industry\nExperience",
 
     prod_eyebrow: "Our Products",
@@ -218,7 +212,7 @@ window.I18N = {
     ct_addr_v: "6/F, No. 173, Middle Jiangnan Avenue, Haizhu District, Guangzhou, China",
 
     form_title: "Contact via WhatsApp",
-    form_sub: "Fill in your details and tap the button to chat with us directly on WhatsApp.",,
+    form_sub: "Fill in your details and tap the button to chat with us directly on WhatsApp.",
     form_name: "Your Name *",
     form_email: "Email",
     form_phone: "Phone / WhatsApp",
@@ -233,12 +227,12 @@ window.I18N = {
     wa_email: "Email",
     wa_phone: "Phone",
     wa_country: "Country",
-    wa_req: "Requirements",,,
+    wa_req: "Requirements",
 
     foot_desc: "Jielian Supply Chain Management (Guangdong) Co., Ltd. — comprehensive building materials supply and one-stop sourcing, connecting quality Chinese factories with global customers.",
     foot_links: "Quick Links",
     foot_prod: "Products",
-    foot_p1: "Sanitary Ware",
+    foot_p1: "Lights & Fittings",
     foot_p2: "Hardware & Fasteners",
     foot_p3: "Electrical",
     foot_p4: "Plumbing",
