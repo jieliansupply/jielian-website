@@ -1,0 +1,163 @@
+/* ==========================================================================
+   捷链卫浴 - 产品目录页样式
+   ========================================================================== */
+
+.catalog-hero {
+  background: linear-gradient(160deg, #084d94 0%, #0a66c2 55%, #0f9d58 130%);
+  color: #fff;
+  padding: 56px 0 64px;
+  text-align: center;
+}
+.catalog-hero h1 {
+  font-size: clamp(28px, 4.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+}
+.catalog-hero p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.catalog-main {
+  padding: 40px 0 80px;
+  background: #f6f8fb;
+}
+
+/* 分类 Tab */
+.cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+  position: sticky;
+  top: 70px;
+  z-index: 50;
+  background: #f6f8fb;
+  padding: 12px 0;
+}
+.cat-tabs a {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.cat-tabs a:hover {
+  border-color: #0a66c2;
+  color: #0a66c2;
+}
+
+/* 分类区块 */
+.cat-section {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 36px 32px;
+  margin-bottom: 32px;
+  scroll-margin-top: 130px;
+}
+.cat-section-head h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+}
+.cat-desc {
+  color: #6b7280;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+/* 图册配图 */
+.cat-figure {
+  margin: 0 0 28px;
+  text-align: center;
+}
+.cat-figure img {
+  max-width: 100%;
+  max-height: 560px;
+  width: auto;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.06);
+}
+.cat-figure figcaption {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: #9ca3af;
+}
+
+/* 分组 */
+.cat-group {
+  margin-bottom: 30px;
+}
+.cat-group:last-child { margin-bottom: 0; }
+.cat-group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.cat-group-head h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1f2937;
+}
+.cat-group-note {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* 型号表格 */
+.cat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.cat-table thead th {
+  text-align: left;
+  padding: 10px 14px;
+  background: #e8f1fb;
+  color: #084d94;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.cat-table thead th:first-child { border-radius: 8px 0 0 8px; }
+.cat-table thead th:last-child { border-radius: 0 8px 8px 0; }
+.cat-table tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #374151;
+}
+.cat-table tbody tr:hover td { background: #f8fafc; }
+.cat-table td.model {
+  font-weight: 700;
+  color: #1f2937;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cat-table td.size {
+  color: #4b5563;
+  font-variant-numeric: tabular-nums;
+}
+.cat-table td.note {
+  color: #6b7280;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* 响应式 */
+@media (max-width: 680px) {
+  .cat-section { padding: 24px 16px; }
+  .cat-table thead th, .cat-table tbody td { padding: 8px 10px; }
+  .cat-figure img { max-height: 360px; }
+  .cat-tabs { top: 70px; }
+}
