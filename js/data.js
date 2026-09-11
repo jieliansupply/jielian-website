@@ -5,6 +5,12 @@
 /* ---------- 产品分类（11 大类，参照建材供应商行业结构） ---------- */
 window.PRODUCTS = [
   {
+    key: "tiles",
+    icon: "layout",
+    zh: { name: "瓷砖", desc: "通体大理石瓷砖，亮面/天鹅绒柔光面，800×800mm，无限连纹，适合客厅、商业及高端住宅空间。", tags: ["大理石瓷砖", "亮面", "天鹅绒柔光", "无限连纹"] },
+    en: { name: "Ceramic Tiles", desc: "Full-body marble tiles, glossy / velvet soft finish, 800×800mm, continuous vein, ideal for living, commercial and premium residential spaces.", tags: ["Marble Tiles", "Glossy", "Velvet Soft", "Continuous Vein"] }
+  },
+  {
     key: "hardware",
     icon: "tool",
     zh: { name: "五金紧固件", desc: "不锈钢/碳钢/镀锌紧固件，螺栓、螺母、螺钉、弹簧垫圈、螺纹杆、膨胀螺栓等。", tags: ["螺栓", "螺母", "螺钉", "垫圈", "螺纹杆"] },
