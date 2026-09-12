@@ -3,3 +3,6 @@ _preview*.png
 *_metadata.json
 .DS_Store
 Thumbs.db
+
+# 每日安全巡检日志（不提交）
+security-log/
