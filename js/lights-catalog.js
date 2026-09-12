@@ -1,10 +1,10 @@
 /* ==========================================================================
-   捷链锂电工具 - 产品目录页渲染与交互（卡片墙）
+   捷链灯具照明 - 产品目录页渲染与交互（卡片墙）
    ========================================================================== */
 (function () {
   "use strict";
 
-  var CAT = window.TOOLS_CATALOG || [];
+  var CAT = window.LIGHTS_CATALOG || [];
 
   var I18N = {
     zh: {
@@ -15,24 +15,17 @@
       nav_lights: "灯具照明",
       nav_services: "服务",
       nav_contact: "联系我们",
-      hero_title: "锂电工具产品目录",
-      hero_sub: "21V 锂电无绳工具 — 电钻、冲击扳手、园林工具、切割打磨、清洗，支持 OEM/ODM。",
+      hero_title: "灯具照明产品目录",
+      hero_sub: "磁吸轨道灯、轨道射灯、明装筒灯、嵌入式格栅灯 — 室内商业与家居照明，支持 OEM/ODM。",
       model: "型号",
       name: "产品名称",
-      voltage: "电压",
-      battery: "电池容量",
-      speed: "转速",
-      torque: "扭矩",
-      chuck: "夹持范围",
-      drive: "驱动",
-      socket: "套筒",
-      blade: "锯片",
-      disc: "磨片",
-      cutting: "切割",
-      pressure: "压力",
-      flow: "流量",
-      volume: "风量",
-      motor: "电机",
+      power: "功率",
+      cct: "色温",
+      color: "灯体颜色",
+      source: "光源类型",
+      dimmable: "调光",
+      size: "尺寸",
+      mount: "安装方式",
       cert: "认证",
       inquiry: "咨询这款"
     },
@@ -44,24 +37,17 @@
       nav_lights: "Lights & Fittings",
       nav_services: "Services",
       nav_contact: "Contact",
-      hero_title: "Cordless Tools Catalog",
-      hero_sub: "21V cordless tools — drills, impact wrenches, garden tools, cutting & grinding, cleaning, OEM/ODM available.",
+      hero_title: "Lighting & Fittings Catalog",
+      hero_sub: "Magnetic track lights, track spotlights, surface downlights and recessed grille lights — indoor commercial & residential lighting, OEM/ODM available.",
       model: "Model",
       name: "Product",
-      voltage: "Voltage",
-      battery: "Battery",
-      speed: "Speed",
-      torque: "Torque",
-      chuck: "Chuck",
-      drive: "Drive",
-      socket: "Socket",
-      blade: "Blade",
-      disc: "Disc",
-      cutting: "Cutting",
-      pressure: "Pressure",
-      flow: "Flow",
-      volume: "Air Volume",
-      motor: "Motor",
+      power: "Power",
+      cct: "CCT",
+      color: "Body Color",
+      source: "Light Source",
+      dimmable: "Dimmable",
+      size: "Size",
+      mount: "Mounting",
       cert: "Certification",
       inquiry: "Inquire"
     }
@@ -71,7 +57,7 @@
   var WHATSAPP = "https://wa.me/8618565728237";
 
   /* 参数字段顺序定义（按字段名 -> 标签 key） */
-  var FIELD_ORDER = ["voltage", "battery", "torque", "speed", "chuck", "drive", "socket", "blade", "disc", "cutting", "pressure", "flow", "volume", "motor", "cert"];
+  var FIELD_ORDER = ["power", "cct", "color", "source", "dimmable", "size", "mount", "cert"];
 
   /* ---------- 渲染分类 Tab ---------- */
   function renderTabs() {
@@ -114,7 +100,7 @@
         var productName = (it.name && (it.name[lang] || it.name.zh)) || "";
 
         var waText = encodeURIComponent(
-          "Hello, I'm interested in your cordless tool model " + it.model +
+          "Hello, I'm interested in your lighting model " + it.model +
           (productName ? " (" + productName + ")" : "") + ". Please send more details."
         );
         var waLink = WHATSAPP + "?text=" + waText;

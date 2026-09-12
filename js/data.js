@@ -39,8 +39,9 @@ window.PRODUCTS = [
   {
     key: "lights",
     icon: "bulb",
-    zh: { name: "灯具照明", desc: "室内外照明、工业/防水/水下照明、LED 灯具、调光器及灯具配件等。", tags: ["LED", "工业照明", "防水灯", "户外灯", "调光"] },
-    en: { name: "Lights & Fittings", desc: "Indoor & outdoor, industrial, weatherproof & underwater lighting, LED modules and dimmers.", tags: ["LED", "Industrial", "Waterproof", "Outdoor"] }
+    link: "lights-catalog.html",
+    zh: { name: "灯具照明", desc: "磁吸轨道灯、轨道射灯、明装筒灯、嵌入式格栅灯等室内商业与家居照明，LED 光源，支持 OEM/ODM。", tags: ["磁吸轨道灯", "轨道射灯", "明装筒灯", "格栅灯"] },
+    en: { name: "Lights & Fittings", desc: "Magnetic track lights, track spotlights, surface downlights and recessed grille lights — indoor commercial & residential LED lighting, OEM/ODM available.", tags: ["Magnetic Track", "Track Spotlight", "Downlight", "Grille"] }
   },
   {
     key: "cablemgmt",
@@ -89,6 +90,7 @@ window.I18N = {
     nav_products: "产品",
     nav_tiles: "瓷砖目录",
     nav_tools: "锂电工具",
+    nav_lights: "灯具照明",
     nav_services: "服务",
     nav_contact: "联系我们",
 
@@ -180,6 +182,7 @@ window.I18N = {
     nav_products: "Products",
     nav_tiles: "Tile Catalog",
     nav_tools: "Cordless Tools",
+    nav_lights: "Lights & Fittings",
     nav_services: "Services",
     nav_contact: "Contact",
 
