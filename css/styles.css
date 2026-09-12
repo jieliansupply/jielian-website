@@ -144,8 +144,8 @@ img { max-width: 100%; display: block; }
 .hero {
   position: relative;
   background:
-    linear-gradient(160deg, rgba(8, 77, 148, 0.92) 0%, rgba(10, 102, 194, 0.88) 55%, rgba(15, 157, 88, 0.82) 130%),
-    url("../images/hero-bg.jpg") center / cover no-repeat;
+    linear-gradient(160deg, rgba(8, 77, 148, 0.90) 0%, rgba(10, 102, 194, 0.86) 55%, rgba(15, 157, 88, 0.80) 130%),
+    url("../images/hero-service.jpg") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
 }
