@@ -1,0 +1,40 @@
+{
+  "created_at_unix": 1789183562,
+  "requested_size": "1536x1152",
+  "generation_size": "1536x1152",
+  "final_resize": null,
+  "output_paths": [
+    "C:\\Users\\32213\\.easyclaw\\workspace\\jielian-website\\images\\about-warehouse.jpg"
+  ],
+  "usage": {
+    "input_images": 0,
+    "generated_images": 1,
+    "output_tokens": 6912,
+    "total_tokens": 6912
+  },
+  "request": {
+    "model": "bytepluses.seedream-5.0-pro",
+    "prompt": "A professional, realistic photograph of a modern building materials warehouse/showroom interior. Neat rows of large-format marble ceramic tiles displayed on vertical display racks, various tile samples in grey, white and beige tones. Clean concrete floor, bright soft industrial lighting from above, some pallets of packaged building materials in the background. A clean, organized, trustworthy B2B supply chain atmosphere. Wide angle, slightly elevated view, depth of field, natural color grading, sharp focus, high detail, photorealistic, no text, no watermark, no people in the foreground.",
+    "size": "1536x1152",
+    "output_format": "jpeg",
+    "response_format": "b64_json",
+    "watermark": false
+  },
+  "response": {
+    "model": "doubao-seedream-5-0-pro-260628",
+    "created": 1789183560,
+    "data": [
+      {
+        "b64_json": "<base64 image; 482176 chars>",
+        "size": "1536x1152",
+        "output_format": "jpeg"
+      }
+    ],
+    "usage": {
+      "input_images": 0,
+      "generated_images": 1,
+      "output_tokens": 6912,
+      "total_tokens": 6912
+    }
+  }
+}
