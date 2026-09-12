@@ -5,6 +5,13 @@
 /* ---------- 产品分类（11 大类，参照建材供应商行业结构） ---------- */
 window.PRODUCTS = [
   {
+    key: "sanitary",
+    icon: "bath",
+    link: "sanitary-catalog.html",
+    zh: { name: "卫浴洁具", desc: "厨房/面盆/浴缸龙头、淋浴花洒套装、座便器、浴缸、淋浴房、浴室柜等全品类卫浴，支持 OEM/ODM。", tags: ["龙头", "花洒", "座便器", "浴缸", "淋浴房"] },
+    en: { name: "Sanitary Ware", desc: "Kitchen / basin / bathtub faucets, shower sets, toilets, bathtubs, shower rooms and bathroom cabinets — full range of sanitary ware, OEM/ODM available.", tags: ["Faucets", "Shower", "Toilets", "Bathtubs", "Shower Rooms"] }
+  },
+  {
     key: "tiles",
     icon: "layout",
     link: "tile-catalog.html",
@@ -91,6 +98,7 @@ window.I18N = {
     nav_tiles: "瓷砖目录",
     nav_tools: "锂电工具",
     nav_lights: "灯具照明",
+    nav_sanitary: "卫浴洁具",
     nav_services: "服务",
     nav_contact: "联系我们",
 
@@ -183,6 +191,7 @@ window.I18N = {
     nav_tiles: "Tile Catalog",
     nav_tools: "Cordless Tools",
     nav_lights: "Lights & Fittings",
+    nav_sanitary: "Sanitary Ware",
     nav_services: "Services",
     nav_contact: "Contact",
 
