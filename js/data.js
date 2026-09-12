@@ -79,6 +79,7 @@ window.I18N = {
     nav_home: "首页",
     nav_about: "关于我们",
     nav_products: "产品",
+    nav_tiles: "瓷砖目录",
     nav_services: "服务",
     nav_contact: "联系我们",
 
@@ -164,6 +165,7 @@ window.I18N = {
     nav_home: "Home",
     nav_about: "About Us",
     nav_products: "Products",
+    nav_tiles: "Tile Catalog",
     nav_services: "Services",
     nav_contact: "Contact",
 

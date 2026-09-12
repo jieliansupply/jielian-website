@@ -8,6 +8,11 @@
 
   var I18N = {
     zh: {
+      nav_home: "首页",
+      nav_about: "关于我们",
+      nav_tiles: "瓷砖目录",
+      nav_services: "服务",
+      nav_contact: "联系我们",
       hero_title: "瓷砖产品目录",
       hero_sub: "通体大理石瓷砖 — 亮面 / 天鹅绒柔光面，800×800mm，无限连纹，支持 OEM/ODM。",
       model: "型号",
@@ -19,6 +24,11 @@
       inquiry: "咨询这款"
     },
     en: {
+      nav_home: "Home",
+      nav_about: "About Us",
+      nav_tiles: "Tile Catalog",
+      nav_services: "Services",
+      nav_contact: "Contact",
       hero_title: "Tile Catalog",
       hero_sub: "Full-body marble tiles — glossy / velvet soft finish, 800×800mm, continuous vein, OEM/ODM available.",
       model: "Model",

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jieliansupply.github.io/jielian-website/sitemap.xml
+Sitemap: https://www.jieliansupply.com/sitemap.xml
