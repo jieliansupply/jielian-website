@@ -12,6 +12,13 @@ window.PRODUCTS = [
     en: { name: "Ceramic Tiles", desc: "Full-body marble tiles, glossy / velvet soft finish, 800×800mm, continuous vein, ideal for living, commercial and premium residential spaces.", tags: ["Marble Tiles", "Glossy", "Velvet Soft", "Continuous Vein"] }
   },
   {
+    key: "powertools",
+    icon: "tool",
+    link: "tools-catalog.html",
+    zh: { name: "锂电工具", desc: "21V 锂电无绳工具：电钻、冲击扳手、吹叶机、修枝剪、打草机、电圆锯、角磨机、高压洗车枪等，无刷电机、长续航。", tags: ["电钻", "冲击扳手", "园林工具", "角磨机", "洗车枪"] },
+    en: { name: "Cordless Tools", desc: "21V cordless tools — drills, impact wrenches, leaf blowers, pruning shears, grass trimmers, circular saws, angle grinders, pressure washers.", tags: ["Drills", "Impact Wrench", "Garden", "Grinder", "Washer"] }
+  },
+  {
     key: "hardware",
     icon: "tool",
     zh: { name: "五金紧固件", desc: "不锈钢/碳钢/镀锌紧固件，螺栓、螺母、螺钉、弹簧垫圈、螺纹杆、膨胀螺栓等。", tags: ["螺栓", "螺母", "螺钉", "垫圈", "螺纹杆"] },
@@ -81,6 +88,7 @@ window.I18N = {
     nav_about: "关于我们",
     nav_products: "产品",
     nav_tiles: "瓷砖目录",
+    nav_tools: "锂电工具",
     nav_services: "服务",
     nav_contact: "联系我们",
 
@@ -171,6 +179,7 @@ window.I18N = {
     nav_about: "About Us",
     nav_products: "Products",
     nav_tiles: "Tile Catalog",
+    nav_tools: "Cordless Tools",
     nav_services: "Services",
     nav_contact: "Contact",
 
