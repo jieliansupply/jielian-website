@@ -7,6 +7,7 @@ window.PRODUCTS = [
   {
     key: "tiles",
     icon: "layout",
+    link: "tile-catalog.html",
     zh: { name: "瓷砖", desc: "通体大理石瓷砖，亮面/天鹅绒柔光面，800×800mm，无限连纹，适合客厅、商业及高端住宅空间。", tags: ["大理石瓷砖", "亮面", "天鹅绒柔光", "无限连纹"] },
     en: { name: "Ceramic Tiles", desc: "Full-body marble tiles, glossy / velvet soft finish, 800×800mm, continuous vein, ideal for living, commercial and premium residential spaces.", tags: ["Marble Tiles", "Glossy", "Velvet Soft", "Continuous Vein"] }
   },
@@ -96,6 +97,10 @@ window.I18N = {
     hero_stat2: "品质把关",
     hero_stat3: "成本优化",
     hero_stat4: "OEM / ODM",
+    hero_num1: "全品类",
+    hero_num2: "验厂",
+    hero_num3: "降本",
+    hero_num4: "定制",
 
     about_title: "关于捷链供应链",
     about_p1: "捷链供应链管理（广东）有限公司是一家专业的建材综合库存商与供应商，服务遍及中国及全球市场的大小工程项目。我们以品质、可靠与客户满意为核心，为承包商、开发商和工业客户提供一站式建材解决方案。",
@@ -103,7 +108,7 @@ window.I18N = {
     about_pt1_t: "多品类综合供应",
     about_pt1_d: "建材、电气、卫浴、五金、工具……一站式配齐",
     about_pt2_t: "源头工厂直供",
-    about_pt2_d: "对接中国优质工厂，验厂把关、压价采购",
+    about_pt2_d: "对接中国优质工厂，验厂把关、议价采购",
     about_pt3_t: "定制与 OEM/ODM",
     about_pt3_d: "按需定制、贴牌生产，满足差异化需求",
     about_img: "产品示意图\n（可替换为仓库 / 产品实拍图）",
@@ -120,7 +125,7 @@ window.I18N = {
     svc1_d: "根据需求精准匹配最优供应商与产品",
     svc2_t: "验厂质检",
     svc2_d: "实地验厂、严格质检，确保品质合规",
-    svc3_t: "议价压价",
+    svc3_t: "成本优化",
     svc3_d: "批量集采、源头议价，帮您降低采购成本",
     svc4_t: "物流交付",
     svc4_d: "国际物流、报关清关，门到门安全送达",
@@ -182,6 +187,10 @@ window.I18N = {
     hero_stat2: "Quality Control",
     hero_stat3: "Cost Saving",
     hero_stat4: "OEM / ODM",
+    hero_num1: "Full Range",
+    hero_num2: "Audit",
+    hero_num3: "Save",
+    hero_num4: "Custom",
 
     about_title: "About Jielian Supply Chain",
     about_p1: "Jielian Supply Chain Management (Guangdong) Co., Ltd. is a specialized stockist and supplier of building materials, serving projects of all sizes across China and global markets. With a strong commitment to quality, reliability and customer satisfaction, we offer contractors, developers and industrial clients complete building material solutions under one roof.",
@@ -272,16 +281,24 @@ window.I18N = {
   var render = function () {
     grid.innerHTML = "";
     window.PRODUCTS.forEach(function (p) {
-      var card = document.createElement("div");
+      var card = document.createElement(p.link ? "a" : "div");
       card.className = "cat-card";
+      if (p.link) {
+        card.href = p.link;
+        card.setAttribute("data-cat-link", "");
+      }
       card.setAttribute("data-reveal", "");
       var txt = p[lang] || p.en;
       var tags = (txt.tags || []).map(function (t) { return "<span>" + t + "</span>"; }).join("");
+      var linkHint = p.link
+        ? '<span class="cat-link">' + (lang === "zh" ? "查看目录" : "View catalog") + ' →</span>'
+        : "";
       card.innerHTML =
         '<span class="ic">' + (iconSvg[p.icon] || iconSvg.box) + "</span>" +
         "<h3>" + txt.name + "</h3>" +
         "<p>" + txt.desc + "</p>" +
-        '<div class="tags">' + tags + "</div>";
+        '<div class="tags">' + tags + "</div>" +
+        linkHint;
       grid.appendChild(card);
     });
     // 重新触发 reveal 观察

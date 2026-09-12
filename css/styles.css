@@ -143,7 +143,9 @@ img { max-width: 100%; display: block; }
    ========================================================================== */
 .hero {
   position: relative;
-  background: linear-gradient(160deg, #084d94 0%, #0a66c2 55%, #0f9d58 130%);
+  background:
+    linear-gradient(160deg, rgba(8, 77, 148, 0.92) 0%, rgba(10, 102, 194, 0.88) 55%, rgba(15, 157, 88, 0.82) 130%),
+    url("../images/hero-bg.jpg") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
 }
@@ -222,15 +224,15 @@ img { max-width: 100%; display: block; }
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 16px;
-  padding: 20px;
+  padding: 22px 18px;
   backdrop-filter: blur(6px);
   text-align: center;
 }
 .hero-card .num {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 800;
-  line-height: 1;
-  margin-bottom: 6px;
+  line-height: 1.1;
+  margin-bottom: 8px;
 }
 .hero-card .lbl { font-size: 13px; color: rgba(255,255,255,0.85); }
 
@@ -388,6 +390,28 @@ img { max-width: 100%; display: block; }
   background: var(--bg-soft);
   border-radius: 999px;
   color: var(--ink-soft);
+}
+
+/* 可点击的分类卡片（有目录链接） */
+.cat-card[data-cat-link] {
+  cursor: pointer;
+  border-color: #c8ddf5;
+}
+.cat-card[data-cat-link]:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-md);
+}
+.cat-card .cat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+}
+.cat-card[data-cat-link]:hover .cat-link {
+  text-decoration: underline;
 }
 
 /* ==========================================================================
