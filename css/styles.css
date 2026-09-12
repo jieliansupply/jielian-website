@@ -144,7 +144,7 @@ img { max-width: 100%; display: block; }
 .hero {
   position: relative;
   background:
-    linear-gradient(160deg, rgba(8, 77, 148, 0.82) 0%, rgba(10, 102, 194, 0.78) 55%, rgba(15, 157, 88, 0.70) 130%),
+    linear-gradient(160deg, rgba(8, 77, 148, 0.72) 0%, rgba(10, 102, 194, 0.66) 55%, rgba(15, 157, 88, 0.55) 130%),
     url("../images/hero-service.jpg") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
@@ -186,13 +186,15 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.5px;
   margin-bottom: 20px;
   max-width: 620px;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 .hero h1 .accent { color: #a8e6c1; }
 .hero p.lead {
   font-size: 17px;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.96);
   max-width: 560px;
   margin-bottom: 32px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 .btn {
