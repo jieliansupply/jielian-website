@@ -132,6 +132,16 @@
     });
   }
 
+  /* ---------- 邮箱防爬（base64 解码，避免爬虫抓取明文） ---------- */
+  document.querySelectorAll("[data-mail]").forEach(function (el) {
+    try {
+      const email = atob(el.getAttribute("data-mail"));
+      el.href = "mailto:" + email;
+      const prefix = el.textContent.trim();
+      el.textContent = prefix ? prefix + " " + email : email;
+    } catch (e) {}
+  });
+
   /* ---------- 页脚年份 ---------- */
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
