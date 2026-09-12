@@ -1,4 +1,5 @@
 ﻿preview*.png
 _preview*.png
+*_metadata.json
 .DS_Store
 Thumbs.db
