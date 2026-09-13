@@ -33,65 +33,11 @@ window.PRODUCTS = [
     en: { name: "Cordless Tools", desc: "21V cordless tools — drills, impact wrenches, leaf blowers, pruning shears, grass trimmers, circular saws, angle grinders, pressure washers.", tags: ["Drills", "Impact Wrench", "Garden", "Grinder", "Washer"] }
   },
   {
-    key: "hardware",
-    icon: "tool",
-    zh: { name: "五金紧固件", desc: "不锈钢/碳钢/镀锌紧固件，螺栓、螺母、螺钉、弹簧垫圈、螺纹杆、膨胀螺栓等。", tags: ["螺栓", "螺母", "螺钉", "垫圈", "螺纹杆"] },
-    en: { name: "Hardware & Fasteners", desc: "SS, MS & GI fasteners — bolts, nuts, screws, spring washers, threaded rods, anchor bolts and more.", tags: ["Bolts", "Nuts", "Screws", "Washers", "Rods"] }
-  },
-  {
-    key: "cables",
-    icon: "cable",
-    zh: { name: "电缆电线", desc: "铠装电缆、单芯/多芯电线、PVC 软电缆、控制电缆、建筑电线、同轴电缆等。", tags: ["铠装电缆", "多芯线", "控制线", "网线", "同轴"] },
-    en: { name: "Cables & Wires", desc: "Armored cables, single & multi-core wires, PVC flexible cables, control, building & coaxial cables.", tags: ["Armored", "Multi-core", "Control", "Coaxial"] }
-  },
-  {
-    key: "electrical",
-    icon: "bolt",
-    zh: { name: "配电与开关", desc: "配电箱、MCB/MCCB/RCCB、隔离开关、继电器、定时器、开关插座等电气产品。", tags: ["配电箱", "断路器", "隔离开关", "继电器", "插座"] },
-    en: { name: "Distribution & Switchgear", desc: "Distribution boards, MCB/MCCB/RCCB, isolators, relays, timers, switches & sockets.", tags: ["MDB", "MCB", "Isolators", "Relays", "Sockets"] }
-  },
-  {
     key: "lights",
     icon: "bulb",
     link: "lights-catalog.html",
     zh: { name: "灯具照明", desc: "磁吸轨道灯、轨道射灯、明装筒灯、嵌入式格栅灯等室内商业与家居照明，LED 光源，支持 OEM/ODM。", tags: ["磁吸轨道灯", "轨道射灯", "明装筒灯", "格栅灯"] },
     en: { name: "Lights & Fittings", desc: "Magnetic track lights, track spotlights, surface downlights and recessed grille lights — indoor commercial & residential LED lighting, OEM/ODM available.", tags: ["Magnetic Track", "Track Spotlight", "Downlight", "Grille"] }
-  },
-  {
-    key: "cablemgmt",
-    icon: "layout",
-    zh: { name: "线缆管理系统", desc: "PVC/GI 线管、线槽及配件、电缆桥架、母线槽、格兰头、接线鼻等。", tags: ["线管", "线槽", "桥架", "母线", "格兰头"] },
-    en: { name: "Cable Management", desc: "PVC & GI conduits, trunking & fittings, cable trays, busbars, glands and lugs.", tags: ["Conduits", "Trunking", "Trays", "Busbars", "Glands"] }
-  },
-  {
-    key: "enclosures",
-    icon: "box",
-    zh: { name: "外壳箱体", desc: "金属外壳、可扩展外壳、端子箱、工业箱、防风雨外壳、PVC/GRP 外壳、机柜等。", tags: ["金属箱", "端子箱", "防雨箱", "机柜", "PVC箱"] },
-    en: { name: "Enclosures", desc: "Metal, extendable & industrial enclosures, terminal boxes, weatherproof, PVC/GRP enclosures.", tags: ["Metal", "Terminal", "Weatherproof", "Cabinets"] }
-  },
-  {
-    key: "earthing",
-    icon: "shield",
-    zh: { name: "接地设备", desc: "接地棒、接地电极、接地排/夹、接地配件、联轴器、接地坑等。", tags: ["接地棒", "接地电极", "接地夹", "接地排"] },
-    en: { name: "Earthing Equipment", desc: "Earth rods & bars, electrodes, bonds & clamps, earthing accessories, couplers, earth pits.", tags: ["Rods", "Electrodes", "Clamps", "Bonds"] }
-  },
-  {
-    key: "hvac",
-    icon: "wind",
-    zh: { name: "HVAC 通风", desc: "暖通空调产品、金属风管、接头、通风系统、风机等。", tags: ["风管", "风机", "通风", "接头"] },
-    en: { name: "HVAC & Ventilation", desc: "General HVAC products, metal pipes, fittings, ventilation systems, fans and more.", tags: ["Ducts", "Fans", "Ventilation", "Fittings"] }
-  },
-  {
-    key: "safety",
-    icon: "hardhat",
-    zh: { name: "安全与吊装", desc: "安全连体服、安全鞋、安全帽、耳塞、护目镜、吊装设备及各类安全材料。", tags: ["安全鞋", "安全帽", "护目镜", "吊装", "劳保"] },
-    en: { name: "Safety & Lifting", desc: "Safety coveralls, shoes, helmets, ear protectors, goggles, lifting equipment and materials.", tags: ["Shoes", "Helmets", "Goggles", "Lifting"] }
-  },
-  {
-    key: "tools",
-    icon: "wrench",
-    zh: { name: "机械与工具", desc: "水暖工具、电动/手动工具、测量工具、螺丝刀、钳子、锤子、锯片等。", tags: ["电动工具", "手动工具", "测量", "钳子", "锯片"] },
-    en: { name: "Machinery & Tools", desc: "Plumbing tools, power & hand tools, measuring tools, screwdrivers, cutters, pliers, hammers.", tags: ["Power tools", "Hand tools", "Measuring", "Pliers"] }
   }
 ];
 
@@ -112,7 +58,7 @@ window.I18N = {
 
     hero_badge: "✅ 全品类建材 · 专业采购服务 · 高性价比",
     hero_title: "综合建材供应与一站式采购服务",
-    hero_lead: "捷链供应链管理（广东）有限公司，供应建筑、电气、水暖卫浴、五金、钢材、油漆、紧固件、安全与机械工具等 15 大类全品类建材。源头工厂直采、验厂质检、批量议价，让您用更低的成本拿到品质可靠的货——从选品到门到门物流，一站式搞定。",
+    hero_lead: "捷链供应链管理（广东）有限公司，供应建筑、电气、水暖卫浴、五金、钢材、油漆、紧固件、安全与机械工具等全品类建材。源头工厂直采、验厂质检、批量议价，让您用更低的成本拿到品质可靠的货——从选品到门到门物流，一站式搞定。",
     hero_cta1: "浏览产品范围",
     hero_cta2: "获取报价",
     hero_card1: "产品大类",
@@ -206,7 +152,7 @@ window.I18N = {
 
     hero_badge: "✅ Full Range · Professional Service · Great Value",
     hero_title: "Comprehensive Building Materials & One-stop Sourcing",
-    hero_lead: "Jielian Supply Chain Management (Guangdong) Co., Ltd. supplies 15+ categories of building materials — construction, electrical, plumbing & sanitary, hardware, steel, paints, fasteners, safety and machinery & tools. Direct factory sourcing, on-site QC and bulk negotiation mean reliable quality at lower cost — from selection to door-to-door delivery, all in one place.",
+    hero_lead: "Jielian Supply Chain Management (Guangdong) Co., Ltd. supplies building materials — construction, electrical, plumbing & sanitary, hardware, steel, paints, fasteners, safety and machinery & tools. Direct factory sourcing, on-site QC and bulk negotiation mean reliable quality at lower cost — from selection to door-to-door delivery, all in one place.",
     hero_cta1: "Browse Products",
     hero_cta2: "Get a Quote",
     hero_card1: "Product Categories",
