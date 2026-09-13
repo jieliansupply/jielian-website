@@ -59,7 +59,7 @@ window.SANITARY_CATALOG = [
     },
     items: [
       { model: "YQ10001T", name: { zh: "淋浴花洒套装", en: "Shower Set" }, type: "淋浴套装", material: "304 不锈钢", feature: "顶喷 + 手持", color: "镀铬 / 枪灰 / 黑 / 白 / 拉丝金", image: "images/sanitary/YQ10001T.jpg" },
-      { model: "YQ10025T", name: { zh: "淋浴花洒套装（琵琶设计）", en: "Shower Set (Pipa Design)" }, type: "淋浴套装", material: "304 不锈钢", feature: "东方韵律设计", color: "白 / 镀铬 / 枪灰 / 黑 / 拉丝金", image: "images/sanitary/YQ10025T.jpg" },
+      { model: "YQ10025T", name: { zh: "淋浴花洒套装（四水归堂设计）", en: "Shower Set (Four Waters Design)" }, type: "淋浴套装", material: "304 不锈钢", feature: "四水归堂 / 聚水生财东方设计", color: "白 / 镀铬 / 枪灰 / 黑 / 拉丝金", image: "images/sanitary/YQ10025T.jpg" },
       { model: "YQ10027T", name: { zh: "恒温淋浴套装", en: "Thermostatic Shower Set" }, type: "恒温淋浴", material: "304 不锈钢", feature: "38°C 恒温", color: "多色", image: "images/sanitary/YQ10027T.jpg" },
       { model: "YQ10036T", name: { zh: "单冷明装淋浴", en: "Single Cold Shower" }, type: "单冷淋浴", material: "304 不锈钢", feature: "明装 / 墙进水", color: "多色", image: "images/sanitary/YQ10036T.jpg" },
       { model: "YQ10005T", name: { zh: "淋浴花洒套装", en: "Shower Set" }, type: "淋浴套装", material: "304 不锈钢", feature: "顶喷 + 手持", color: "镀铬 / 枪灰 / 黑 / 白", image: "images/sanitary/YQ10005T.jpg" }
