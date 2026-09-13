@@ -30,7 +30,7 @@ window.SECURITY_CATALOG = [
       en: "Indoor pan-tilt camera series with 1MP / 2MP / 3MP / 4MP options, WiFi Bluetooth or lifetime-free 4G, some with power adapter and infrared mode, remote monitoring supported."
     },
     items: [
-      { model: "Y1-W13", name: { zh: "摇头机（圆润屏显款）", en: "Pan-tilt (Round Display)" }, spec: "100万~400万 · 带电源", resolution: "1080P", network: "WiFi 蓝牙", feature: "红外 / 可定制", image: "images/security/Y1-W10-HY.png" },
+      { model: "Y1-W13", name: { zh: "摇头机（台式白款）", en: "Pan-tilt (Desktop White)" }, spec: "100万~400万 · 带电源", resolution: "1080P", network: "WiFi 蓝牙", feature: "红外 / 可定制", image: "images/security/Y1-W10-HY.png" },
       { model: "Y2-W10-HY", name: { zh: "摇头机（台式黑款）", en: "Pan-tilt (Desktop Black)" }, spec: "100万 · 带电源", resolution: "720P", network: "WiFi", feature: "红外模式", image: "images/security/Y2-W10-HY.png" },
       { model: "Y3-W10-HY", name: { zh: "摇头机（双天线壁挂）", en: "Pan-tilt (Dual-antenna Wall)" }, spec: "100万~300万 · 带电源", resolution: "720P", network: "WiFi 蓝牙", feature: "红外 / 可定制", image: "images/security/Y3-W10-HY.png" },
       { model: "Y4-W10-HY", name: { zh: "摇头机（灯座式白款）", en: "Pan-tilt (Lamp-socket White)" }, spec: "100万~300万 · 带电源", resolution: "720P", network: "WiFi 蓝牙", feature: "红外 / 可定制", image: "images/security/Y4-W10-HY.png" },
