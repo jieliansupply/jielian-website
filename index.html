@@ -102,6 +102,19 @@
         <p class="lead" data-lang="hero_lead">
           捷链供应链管理（广东）有限公司，专业供应建筑、电气、水暖卫浴、五金、钢材、油漆、紧固件、安全与机械工具等全品类建材，面向承包商、开发商及工业客户，提供从选品、验厂到物流的一站式解决方案。
         </p>
+        <!-- 产品搜索框 -->
+        <div class="product-search" id="productSearch">
+          <div class="ps-input-wrap">
+            <svg class="ps-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="psInput" class="ps-input" autocomplete="off"
+                   data-ph-zh="搜索您感兴趣的产品，如：卫浴、瓷砖、工具…"
+                   data-ph-en="Search products — sanitary, tiles, tools…"
+                   aria-label="产品搜索">
+            <button type="button" class="ps-clear" id="psClear" aria-label="清除">&times;</button>
+          </div>
+          <div class="ps-chips" id="psChips"></div>
+          <div class="ps-results" id="psResults" hidden></div>
+        </div>
         <div class="hero-actions">
           <a href="#products" class="btn btn-primary" data-lang="hero_cta1">浏览产品范围</a>
           <a href="#contact" class="btn btn-ghost" data-lang="hero_cta2">获取报价</a>
