@@ -12,6 +12,13 @@ window.PRODUCTS = [
     en: { name: "Sanitary Ware", desc: "Kitchen / basin / bathtub faucets, shower sets, toilets, bathtubs, shower rooms and bathroom cabinets — full range of sanitary ware, OEM/ODM available.", tags: ["Faucets", "Shower", "Toilets", "Bathtubs", "Shower Rooms"] }
   },
   {
+    key: "security",
+    icon: "shield",
+    link: "security-catalog.html",
+    zh: { name: "安防监控", desc: "幻境盒子 SeeBox 摄像头（小球机/摇头机/大球机/半球枪机/AOV/太阳能）+ 极科源 Jikeyuan 网络摄像机、NVR 硬盘录像机、监控周边配件，支持 OEM/ODM。", tags: ["摄像头", "网络摄像机", "NVR", "POE交换机", "太阳能监控"] },
+    en: { name: "Security & Surveillance", desc: "SeeBox cameras (mini dome / pan-tilt / large dome / hemisphere & bullet / AOV / solar) + Jikeyuan network cameras, NVR recorders and monitoring accessories, OEM/ODM available.", tags: ["Cameras", "IP Cameras", "NVR", "POE Switch", "Solar CCTV"] }
+  },
+  {
     key: "tiles",
     icon: "layout",
     link: "tile-catalog.html",
@@ -99,6 +106,7 @@ window.I18N = {
     nav_tools: "锂电工具",
     nav_lights: "灯具照明",
     nav_sanitary: "卫浴洁具",
+    nav_security: "安防监控",
     nav_services: "服务",
     nav_contact: "联系我们",
 
@@ -192,6 +200,7 @@ window.I18N = {
     nav_tools: "Cordless Tools",
     nav_lights: "Lights & Fittings",
     nav_sanitary: "Sanitary Ware",
+    nav_security: "Security",
     nav_services: "Services",
     nav_contact: "Contact",
 

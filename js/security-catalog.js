@@ -1,10 +1,10 @@
 /* ==========================================================================
-   捷链灯具照明 - 产品目录页渲染与交互（卡片墙）
+   捷链安防监控 - 产品目录页渲染与交互（卡片墙）
    ========================================================================== */
 (function () {
   "use strict";
 
-  var CAT = window.LIGHTS_CATALOG || [];
+  var CAT = window.SECURITY_CATALOG || [];
 
   var I18N = {
     zh: {
@@ -17,18 +17,14 @@
       nav_security: "安防监控",
       nav_services: "服务",
       nav_contact: "联系我们",
-      hero_title: "灯具照明产品目录",
-      hero_sub: "磁吸轨道灯、轨道射灯、明装筒灯、嵌入式格栅灯 — 室内商业与家居照明，支持 OEM/ODM。",
+      hero_title: "安防监控产品目录",
+      hero_sub: "幻境盒子 SeeBox 摄像头（小球机 / 摇头机 / 大球机 / 半球枪机 / AOV / 太阳能）+ 极科源 Jikeyuan 网络摄像机 / NVR 硬盘录像机 / 监控配件，支持 OEM/ODM。",
       model: "型号",
       name: "产品名称",
-      power: "功率",
-      cct: "色温",
-      color: "灯体颜色",
-      source: "光源类型",
-      dimmable: "调光",
-      size: "尺寸",
-      mount: "安装方式",
-      cert: "认证",
+      spec: "规格",
+      resolution: "像素",
+      network: "网络",
+      feature: "特点",
       inquiry: "咨询这款"
     },
     en: {
@@ -41,18 +37,14 @@
       nav_security: "Security",
       nav_services: "Services",
       nav_contact: "Contact",
-      hero_title: "Lighting & Fittings Catalog",
-      hero_sub: "Magnetic track lights, track spotlights, surface downlights and recessed grille lights — indoor commercial & residential lighting, OEM/ODM available.",
+      hero_title: "Security & Surveillance Catalog",
+      hero_sub: "SeeBox cameras (mini dome / pan-tilt / large dome / hemisphere & bullet / AOV / solar) + Jikeyuan network cameras / NVR recorders / accessories, OEM/ODM available.",
       model: "Model",
       name: "Product",
-      power: "Power",
-      cct: "CCT",
-      color: "Body Color",
-      source: "Light Source",
-      dimmable: "Dimmable",
-      size: "Size",
-      mount: "Mounting",
-      cert: "Certification",
+      spec: "Spec",
+      resolution: "Resolution",
+      network: "Network",
+      feature: "Feature",
       inquiry: "Inquire"
     }
   };
@@ -60,10 +52,8 @@
   var lang = "zh";
   var WHATSAPP = "https://wa.me/8618565728237";
 
-  /* 参数字段顺序定义（按字段名 -> 标签 key） */
-  var FIELD_ORDER = ["power", "cct", "color", "source", "dimmable", "size", "mount", "cert"];
+  var FIELD_ORDER = ["spec", "resolution", "network", "feature"];
 
-  /* ---------- 渲染分类 Tab ---------- */
   function renderTabs() {
     var tabs = document.getElementById("catTabs");
     if (!tabs) return;
@@ -76,7 +66,6 @@
     });
   }
 
-  /* ---------- 渲染卡片墙 ---------- */
   function renderContent() {
     var box = document.getElementById("catalogContent");
     if (!box) return;
@@ -104,7 +93,7 @@
         var productName = (it.name && (it.name[lang] || it.name.zh)) || "";
 
         var waText = encodeURIComponent(
-          "Hello, I'm interested in your lighting model " + it.model +
+          "Hello, I'm interested in your security & surveillance model " + it.model +
           (productName ? " (" + productName + ")" : "") + ". Please send more details."
         );
         var waLink = WHATSAPP + "?text=" + waText;
@@ -119,9 +108,13 @@
           return '<div class="spec-row"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
         }).join("");
 
+        var imgHtml = it.image
+          ? '<img src="' + it.image + '" alt="' + it.model + '" loading="lazy">'
+          : '<div class="tile-noimg">' + it.model + '</div>';
+
         card.innerHTML =
           '<div class="tile-img">' +
-            '<img src="' + it.image + '" alt="' + it.model + '" loading="lazy">' +
+            imgHtml +
             '<span class="tile-model">' + it.model + '</span>' +
           '</div>' +
           '<div class="tile-body">' +
@@ -140,7 +133,6 @@
     });
   }
 
-  /* ---------- 语言切换 ---------- */
   function applyLang(l) {
     lang = l;
     document.documentElement.setAttribute("lang", l === "zh" ? "zh-CN" : "en");
@@ -166,7 +158,6 @@
     });
   });
 
-  /* ---------- 移动端导航 ---------- */
   var navToggle = document.getElementById("navToggle");
   var navLinks = document.getElementById("navLinks");
   if (navToggle && navLinks) {
@@ -180,7 +171,6 @@
     });
   }
 
-  /* ---------- 初始化语言 ---------- */
   var saved = null;
   try { saved = localStorage.getItem("jielian_lang"); } catch (e) {}
   if (saved === "zh" || saved === "en") {
@@ -190,7 +180,6 @@
     applyLang(nav.indexOf("zh") === 0 ? "zh" : "en");
   }
 
-  /* ---------- 页脚年份 ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
