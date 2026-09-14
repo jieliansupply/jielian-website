@@ -820,3 +820,66 @@ img { max-width: 100%; display: block; }
     min-height: 44px;
   }
 }
+
+/* ==========================================================================
+   浮动联系按钮（全局，手机端 + 电脑端）
+   ========================================================================== */
+.contact-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+.contact-fab .fab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px;
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.22);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+}
+.contact-fab .fab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(16, 24, 40, 0.30);
+}
+.contact-fab .fab-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.25s ease, opacity 0.25s ease;
+  opacity: 0;
+}
+.contact-fab .fab-btn:hover .fab-label,
+.contact-fab .fab-btn:focus-visible .fab-label {
+  max-width: 260px;
+  opacity: 1;
+  margin-right: 4px;
+}
+.contact-fab .fab-wa { background: #25d366; }
+.contact-fab .fab-wa:hover { background: #1eb959; }
+.contact-fab .fab-mail { background: #0a66c2; }
+.contact-fab .fab-mail:hover { background: #084d94; }
+.contact-fab .fab-tel { background: #1f2937; }
+.contact-fab .fab-tel:hover { background: #111827; }
+
+/* 手机端：并排一行，紧凑显示 */
+@media (max-width: 680px) {
+  .contact-fab {
+    right: 14px;
+    bottom: 16px;
+    flex-direction: row;
+    gap: 8px;
+  }
+  .contact-fab .fab-btn { padding: 12px; }
+  .contact-fab .fab-label { display: none; }
+}
