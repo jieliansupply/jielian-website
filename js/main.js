@@ -90,45 +90,77 @@
 
   /* ---------- 联系表单（跳转 WhatsApp 发送询盘） ---------- */
   const WHATSAPP_NUMBER = "8618565728237"; // 不带 + 号
+  const CONTACT_EMAIL = "postmaster@jieliansupply.com";
   const form = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
   if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = form.querySelector("#name").value.trim();
-      const email = form.querySelector("#email").value.trim();
-      const message = form.querySelector("#message").value.trim();
-      const phone = form.querySelector("#phone").value.trim();
-      const country = form.querySelector("#country").value.trim();
+    const t = function (k, fallback) {
+      return window.I18N && window.I18N[document.documentElement.lang]
+        ? (window.I18N[document.documentElement.lang][k] || fallback) : fallback;
+    };
 
-      const t = function (k, fallback) {
-        return window.I18N && window.I18N[document.documentElement.lang]
-          ? (window.I18N[document.documentElement.lang][k] || fallback) : fallback;
+    // 校验并读取表单字段
+    function readForm() {
+      return {
+        name: form.querySelector("#name").value.trim(),
+        email: form.querySelector("#email").value.trim(),
+        message: form.querySelector("#message").value.trim(),
+        phone: form.querySelector("#phone").value.trim(),
+        country: form.querySelector("#country").value.trim()
       };
+    }
 
-      if (!name || !message) {
-        formStatus.textContent = t("form_fill", "请填写姓名与需求描述");
-        formStatus.style.color = "#cf2e2e";
-        return;
-      }
-
-      // 组装 WhatsApp 消息内容
+    // 组装询盘正文（邮箱 / WhatsApp 共用）
+    function buildBody(f) {
       const lines = [];
       lines.push(t("wa_greet", "询盘（来自捷链供应链官网）"));
-      lines.push(t("wa_name", "姓名") + ": " + name);
-      if (email) lines.push(t("wa_email", "邮箱") + ": " + email);
-      if (phone) lines.push(t("wa_phone", "电话") + ": " + phone);
-      if (country) lines.push(t("wa_country", "国家/地区") + ": " + country);
+      lines.push(t("wa_name", "姓名") + ": " + f.name);
+      if (f.email) lines.push(t("wa_email", "邮箱") + ": " + f.email);
+      if (f.phone) lines.push(t("wa_phone", "电话") + ": " + f.phone);
+      if (f.country) lines.push(t("wa_country", "国家/地区") + ": " + f.country);
       lines.push("");
-      lines.push(t("wa_req", "需求描述") + ": " + message);
+      lines.push(t("wa_req", "需求描述") + ": " + f.message);
+      return lines.join("\n");
+    }
 
-      const text = lines.join("\n");
-      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+    function validate(f) {
+      if (!f.name || !f.message) {
+        formStatus.textContent = t("form_fill", "请填写姓名与需求描述");
+        formStatus.style.color = "#cf2e2e";
+        return false;
+      }
+      return true;
+    }
 
-      // 新窗口打开 WhatsApp
+    // 通过邮箱发送（mailto 打开客户邮件客户端）
+    function sendByEmail(f) {
+      const subject = t("wa_greet", "询盘（来自捷链供应链官网）");
+      const body = buildBody(f);
+      const url = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = url;
+      formStatus.textContent = t("form_ok_email", "已为您打开邮件客户端，发送即可联系我们！");
+      formStatus.style.color = "#0f9d58";
+    }
+
+    // 通过 WhatsApp 发送
+    function sendByWhatsApp(f) {
+      const body = buildBody(f);
+      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(body);
       window.open(url, "_blank", "noopener");
       formStatus.textContent = t("form_ok", "已为您打开 WhatsApp，发送即可联系我们！");
       formStatus.style.color = "#0f9d58";
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const f = readForm();
+      if (!validate(f)) return;
+      const via = e.submitter && e.submitter.getAttribute("data-via");
+      if (via === "email") {
+        sendByEmail(f);
+      } else {
+        sendByWhatsApp(f);
+      }
     });
   }
 

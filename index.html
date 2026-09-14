@@ -288,7 +288,10 @@
             <label for="message" data-lang="form_msg">需求描述 *</label>
             <textarea id="message" name="message" placeholder="请描述您需要的产品、数量、规格等" required></textarea>
           </div>
-          <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;" data-lang="form_btn">WhatsApp 联系</button>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-green" data-via="wa" data-lang="form_btn_wa">WhatsApp 联系</button>
+            <button type="submit" class="btn btn-blue" data-via="email" data-lang="form_btn_email">邮箱联系</button>
+          </div>
           <p class="form-note" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>

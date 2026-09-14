@@ -336,6 +336,8 @@ img { max-width: 100%; display: block; }
 .btn-ghost:hover { background: rgba(255,255,255,0.1); }
 .btn-green { background: var(--green); color: #fff; }
 .btn-green:hover { background: #0c8549; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: var(--blue-dark); }
 
 .hero-visual {
   position: relative;
@@ -652,6 +654,8 @@ img { max-width: 100%; display: block; }
 }
 .form-group textarea { resize: vertical; min-height: 110px; }
 .form-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 10px; }
+.form-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.form-actions .btn { flex: 1; justify-content: center; min-width: 160px; }
 
 /* ==========================================================================
    页脚
