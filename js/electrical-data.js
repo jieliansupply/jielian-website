@@ -88,13 +88,23 @@ window.ELECTRICAL_CATALOG = [
         image: "images/electrical/t5.jpg"
       },
       {
-        model: "F10 木纹系列",
-        name: { zh: "F10 木纹系列", en: "F10 Wood-Grain Series" },
-        type: "仿木纹面板",
-        material: "PC 仿木纹面板",
+        model: "T3 超薄系列",
+        name: { zh: "T3 超薄系列", en: "T3 Ultra-Thin Series" },
+        type: "超薄 · 无边框",
+        material: "PC 面板",
         feature: "开关、13A 英式插座、多功能插座、USB/Type-C、大功率开关、弱电、厨灶单元",
-        color: "黑木纹",
-        models: "F10-01~71",
+        color: "白 / 金 / 灰 / 黑",
+        models: "T3-01~70",
+        image: "images/electrical/t3.jpg"
+      },
+      {
+        model: "F10 系列",
+        name: { zh: "F10 系列", en: "F10 Series" },
+        type: "多纹理面板（拉丝 / 西瓜纹 / 纯色）",
+        material: "PC 面板",
+        feature: "开关、13A 英式插座、多功能插座、USB/Type-C、大功率开关、弱电、厨灶单元",
+        color: "白 / 金 / 灰 / 黑",
+        models: "F10-01~70",
         image: "images/electrical/f10.jpg"
       },
       {
