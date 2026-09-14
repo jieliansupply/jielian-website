@@ -19,7 +19,7 @@
       nav_services: "服务",
       nav_contact: "联系我们",
       hero_title: "锂电工具产品目录",
-      hero_sub: "21V 锂电无绳工具 — 电钻、冲击扳手、园林工具、切割打磨、清洗，支持 OEM/ODM。",
+      hero_sub: "21V / 12V 锂电无绳工具 — 电钻、冲击扳手、园林工具、电锯、洗车机、暴风机、除雪机、喷漆机等，支持 OEM/ODM。",
       model: "型号",
       name: "产品名称",
       voltage: "电压",
@@ -35,6 +35,8 @@
       pressure: "压力",
       flow: "流量",
       volume: "风量",
+      power: "功率",
+      color: "颜色",
       motor: "电机",
       cert: "认证",
       inquiry: "咨询这款"
@@ -51,7 +53,7 @@
       nav_services: "Services",
       nav_contact: "Contact",
       hero_title: "Cordless Tools Catalog",
-      hero_sub: "21V cordless tools — drills, impact wrenches, garden tools, cutting & grinding, cleaning, OEM/ODM available.",
+      hero_sub: "21V / 12V cordless tools — drills, impact wrenches, garden tools, chainsaws, washers, blowers, snow throwers, spray guns and more. OEM/ODM available.",
       model: "Model",
       name: "Product",
       voltage: "Voltage",
@@ -67,6 +69,8 @@
       pressure: "Pressure",
       flow: "Flow",
       volume: "Air Volume",
+      power: "Power",
+      color: "Color",
       motor: "Motor",
       cert: "Certification",
       inquiry: "Inquire"
@@ -77,7 +81,7 @@
   var WHATSAPP = "https://wa.me/8618565728237";
 
   /* 参数字段顺序定义（按字段名 -> 标签 key） */
-  var FIELD_ORDER = ["voltage", "battery", "torque", "speed", "chuck", "drive", "socket", "blade", "disc", "cutting", "pressure", "flow", "volume", "motor", "cert"];
+  var FIELD_ORDER = ["voltage", "battery", "torque", "speed", "chuck", "drive", "socket", "blade", "disc", "cutting", "pressure", "flow", "volume", "power", "color", "motor", "cert"];
 
   /* ---------- 渲染分类 Tab ---------- */
   function renderTabs() {
