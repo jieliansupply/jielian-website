@@ -90,6 +90,7 @@
 
   /* ---------- 联系表单（跳转 WhatsApp 发送询盘） ---------- */
   const WHATSAPP_NUMBER = "8618565728237"; // 不带 + 号
+  const WHATSAPP_DISPLAY = "+86 185 6572 8237";
   const CONTACT_EMAIL = "postmaster@jieliansupply.com";
   const form = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
@@ -132,23 +133,120 @@
       return true;
     }
 
-    // 通过邮箱发送（mailto 打开客户邮件客户端）
-    function sendByEmail(f) {
-      const subject = t("wa_greet", "询盘（来自捷链供应链官网）");
-      const body = buildBody(f);
-      const url = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      window.location.href = url;
-      formStatus.textContent = t("form_ok_email", "已为您打开邮件客户端，发送即可联系我们！");
-      formStatus.style.color = "#0f9d58";
+    // 复制文本到剪贴板（兼容手机浏览器，带超时兜底）
+    function copyText(text, onDone) {
+      var done = false;
+      var finish = function () { if (!done) { done = true; onDone(); } };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        var timer = setTimeout(function () { fallbackCopy(text, finish); }, 600);
+        navigator.clipboard.writeText(text).then(function () {
+          clearTimeout(timer); finish();
+        }, function () {
+          clearTimeout(timer); fallbackCopy(text, finish);
+        });
+      } else {
+        fallbackCopy(text, finish);
+      }
+    }
+    function fallbackCopy(text, onDone) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      onDone();
     }
 
-    // 通过 WhatsApp 发送
+    // 通过邮箱发送（EmailJS 后端直发）
+    function sendByEmail(f) {
+      var btn = form.querySelector('button[data-via="email"]');
+      var origText = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = t("form_sending", "发送中…"); }
+
+      // EmailJS 后端（配置后自动启用）
+      if (window.EMAILJS && window.EMAILJS.publicKey && window.EMAILJS.serviceId && window.EMAILJS.templateId) {
+        var payload = {
+          name: f.name,
+          email: f.email || t("wa_none", "未填写"),
+          phone: f.phone || t("wa_none", "未填写"),
+          country: f.country || t("wa_none", "未填写"),
+          message: f.message
+        };
+        fetch("https://api.emailjs.com/api/v1.0/email/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            service_id: window.EMAILJS.serviceId,
+            template_id: window.EMAILJS.templateId,
+            user_id: window.EMAILJS.publicKey,
+            template_params: payload
+          })
+        }).then(function (resp) {
+          if (resp.ok) {
+            formStatus.textContent = t("form_ok_email", "已发送成功！我们会尽快回复您。");
+            formStatus.style.color = "#0f9d58";
+          } else {
+            throw new Error("send fail");
+          }
+        }).catch(function () {
+          formStatus.textContent = t("form_err", "发送失败，请稍后重试或直接邮件联系我们。");
+          formStatus.style.color = "#cf2e2e";
+        }).finally(function () {
+          if (btn) { btn.disabled = false; btn.textContent = origText; }
+        });
+      } else {
+        // 未配置 EmailJS：回退到 mailto
+        var subject = t("wa_greet", "询盘（来自捷链供应链官网）");
+        var body = buildBody(f);
+        window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        if (btn) { btn.disabled = false; btn.textContent = origText; }
+      }
+    }
+
+    // 通过 WhatsApp 发送：显示引导层（复制号码 + 打开 WhatsApp）
     function sendByWhatsApp(f) {
-      const body = buildBody(f);
-      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(body);
-      window.open(url, "_blank", "noopener");
-      formStatus.textContent = t("form_ok", "已为您打开 WhatsApp，发送即可联系我们！");
-      formStatus.style.color = "#0f9d58";
+      var body = buildBody(f);
+      // 先立即显示引导弹层，不阻塞
+      showWaGuide(body);
+      // 尽力复制内容到剪贴板（失败不影响弹层展示）
+      copyText(body, function () {});
+    }
+
+    // WhatsApp 引导弹层
+    function showWaGuide(body) {
+      // 移除旧弹层
+      var old = document.getElementById("waGuide");
+      if (old) old.remove();
+
+      var overlay = document.createElement("div");
+      overlay.id = "waGuide";
+      overlay.className = "wa-guide";
+      overlay.innerHTML =
+        '<div class="wa-guide-card">' +
+          '<button class="wa-guide-close" aria-label="关闭">×</button>' +
+          '<h4>' + t("wa_guide_title", "已复制询盘内容，接下来这样联系我：") + '</h4>' +
+          '<div class="wa-guide-steps">' +
+            '<div class="wa-guide-step"><span>1</span><p>' + t("wa_guide_s1", "打开 WhatsApp") + '</p></div>' +
+            '<div class="wa-guide-step"><span>2</span><p>' + t("wa_guide_s2", "添加我的号码并粘贴发送") + '</p></div>' +
+          '</div>' +
+          '<div class="wa-guide-number">' + WHATSAPP_DISPLAY + '</div>' +
+          '<div class="wa-guide-actions">' +
+            '<a class="btn btn-green" href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(body) + '" target="_blank" rel="noopener">' + t("wa_guide_open", "打开 WhatsApp") + '</a>' +
+            '<button class="btn btn-blue" id="waCopyNum">' + t("wa_guide_copy", "复制号码") + '</button>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.remove(); });
+      overlay.querySelector(".wa-guide-close").addEventListener("click", function () { overlay.remove(); });
+      var copyNumBtn = overlay.querySelector("#waCopyNum");
+      copyNumBtn.addEventListener("click", function () {
+        copyText(WHATSAPP_DISPLAY, function () {
+          copyNumBtn.textContent = t("wa_guide_copied", "已复制 ✓");
+        });
+      });
     }
 
     form.addEventListener("submit", function (e) {
