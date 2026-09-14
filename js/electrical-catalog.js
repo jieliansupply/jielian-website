@@ -1,10 +1,10 @@
 /* ==========================================================================
-   捷链卫浴 - 产品目录页渲染与交互（卡片墙）
+   捷链开关插座 - 产品目录页渲染与交互（卡片墙）
    ========================================================================== */
 (function () {
   "use strict";
 
-  var CAT = window.SANITARY_CATALOG || [];
+  var CAT = window.ELECTRICAL_CATALOG || [];
 
   var I18N = {
     zh: {
@@ -18,16 +18,15 @@
       nav_electrical: "开关插座",
       nav_services: "服务",
       nav_contact: "联系我们",
-      hero_title: "卫浴洁具产品目录",
-      hero_sub: "厨房 / 面盆 / 浴缸龙头、淋浴花洒套装、连体 / 挂墙 / 智能座便器 — 不锈钢龙头五金与陶瓷洁具，支持 OEM/ODM。",
-      model: "型号",
+      hero_title: "开关插座产品目录",
+      hero_sub: "欧式 / 英式标准墙壁开关插座（超薄 · 窄框 · 玻璃 · 肤感 · 纹理多系列）+ 轨道插座，多国标准插孔，支持 OEM/ODM。",
+      model: "系列",
       name: "产品名称",
-      type: "类型",
-      size: "尺寸",
-      trap: "坑距",
+      type: "规格",
       material: "材质",
-      feature: "特点",
+      feature: "功能",
       color: "颜色",
+      models: "型号范围",
       inquiry: "咨询这款"
     },
     en: {
@@ -41,16 +40,15 @@
       nav_electrical: "Switches & Sockets",
       nav_services: "Services",
       nav_contact: "Contact",
-      hero_title: "Sanitary Ware Catalog",
-      hero_sub: "Kitchen / basin / bathtub faucets, shower sets, one-piece / wall-hung / smart toilets — stainless steel faucets and ceramic sanitary ware, OEM/ODM available.",
-      model: "Model",
+      hero_title: "Switches & Sockets Catalog",
+      hero_sub: "European / British standard wall switches & sockets (ultra-thin · narrow-frame · glass · skin-touch · texture series) + power track sockets, multi-country sockets, OEM/ODM available.",
+      model: "Series",
       name: "Product",
-      type: "Type",
-      size: "Size",
-      trap: "Roughing-in",
+      type: "Spec",
       material: "Material",
       feature: "Feature",
       color: "Color",
+      models: "Model Range",
       inquiry: "Inquire"
     }
   };
@@ -58,7 +56,7 @@
   var lang = "zh";
   var WHATSAPP = "https://wa.me/8618565728237";
 
-  var FIELD_ORDER = ["type", "size", "trap", "material", "feature", "color"];
+  var FIELD_ORDER = ["type", "material", "feature", "color", "models"];
 
   function renderTabs() {
     var tabs = document.getElementById("catTabs");
@@ -99,7 +97,7 @@
         var productName = (it.name && (it.name[lang] || it.name.zh)) || "";
 
         var waText = encodeURIComponent(
-          "Hello, I'm interested in your sanitary ware model " + it.model +
+          "Hello, I'm interested in your switches & sockets series " + it.model +
           (productName ? " (" + productName + ")" : "") + ". Please send more details."
         );
         var waLink = WHATSAPP + "?text=" + waText;
@@ -114,9 +112,13 @@
           return '<div class="spec-row"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
         }).join("");
 
+        var imgHtml = it.image
+          ? '<img src="' + it.image + '" alt="' + it.model + '" loading="lazy">'
+          : '<div class="tile-noimg">' + it.model + '</div>';
+
         card.innerHTML =
           '<div class="tile-img">' +
-            '<img src="' + it.image + '" alt="' + it.model + '" loading="lazy">' +
+            imgHtml +
             '<span class="tile-model">' + it.model + '</span>' +
           '</div>' +
           '<div class="tile-body">' +

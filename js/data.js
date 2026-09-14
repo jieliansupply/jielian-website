@@ -19,6 +19,13 @@ window.PRODUCTS = [
     en: { name: "Security & Surveillance", desc: "SeeBox cameras (mini dome / pan-tilt / large dome / hemisphere & bullet / AOV / solar) + Jikeyuan network cameras, NVR recorders and monitoring accessories, OEM/ODM available.", tags: ["Cameras", "IP Cameras", "NVR", "POE Switch", "Solar CCTV"] }
   },
   {
+    key: "electrical",
+    icon: "bolt",
+    link: "electrical-catalog.html",
+    zh: { name: "开关插座", desc: "欧式/英式标准墙壁开关插座（超薄、窄框、玻璃、肤感、纹理多系列）+ 轨道插座，多国标准插孔，支持 OEM/ODM。", tags: ["开关", "插座", "欧式", "英式", "轨道插座"] },
+    en: { name: "Switches & Sockets", desc: "European / British standard wall switches & sockets (ultra-thin, narrow-frame, glass, skin-touch, texture series) + power track sockets, multi-country sockets, OEM/ODM available.", tags: ["Switches", "Sockets", "European", "British", "Power Track"] }
+  },
+  {
     key: "tiles",
     icon: "layout",
     link: "tile-catalog.html",
@@ -53,6 +60,7 @@ window.I18N = {
     nav_lights: "灯具照明",
     nav_sanitary: "卫浴洁具",
     nav_security: "安防监控",
+    nav_electrical: "开关插座",
     nav_services: "服务",
     nav_contact: "联系我们",
 
@@ -147,6 +155,7 @@ window.I18N = {
     nav_lights: "Lights & Fittings",
     nav_sanitary: "Sanitary Ware",
     nav_security: "Security",
+    nav_electrical: "Switches & Sockets",
     nav_services: "Services",
     nav_contact: "Contact",
 
