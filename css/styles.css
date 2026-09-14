@@ -751,9 +751,11 @@ img { max-width: 100%; display: block; }
     gap: 4px;
     display: none;
     box-shadow: var(--shadow-md);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
   .nav-links.open { display: flex; }
-  .nav-links a { width: 100%; }
+  .nav-links a { width: 100%; padding: 12px 14px; }
   .nav-toggle { display: flex; }
   .lang-switch { margin-left: auto; }
   .cat-grid { grid-template-columns: 1fr; }
@@ -762,4 +764,55 @@ img { max-width: 100%; display: block; }
   .hero-stats { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .topbar .tagline { display: none; }
+  .topbar .contact-group { gap: 12px; font-size: 12.5px; }
+
+  /* Hero 移动端压缩，首屏信息更紧凑 */
+  .hero-inner { padding: 48px 20px 56px; gap: 28px; }
+  .hero h1 { font-size: clamp(26px, 8vw, 34px); }
+  .hero p.lead { font-size: 15.5px; line-height: 1.65; }
+  .hero-badge { font-size: 12.5px; }
+  .hero-visual { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 100%; }
+  .hero-card { padding: 16px 12px; }
+  .hero-card .num { font-size: 22px; }
+  .hero-stat { padding: 16px 10px; }
+  .hero-stat .num { font-size: 20px; }
+  .hero-stat .lbl { font-size: 12px; }
+
+  .section { padding: 56px 0; }
+  .section-head { margin-bottom: 36px; }
+  .about-grid { gap: 28px; }
+  .contact-form { padding: 24px 18px; }
+  .ps-input-wrap { height: 50px; }
+}
+
+@media (max-width: 380px) {
+  .container { padding: 0 16px; }
+  .topbar-inner { gap: 10px; }
+  .topbar .contact-group { flex-wrap: nowrap; overflow-x: auto; }
+  .hero-inner { padding: 40px 16px 48px; }
+  .hero-actions { gap: 10px; }
+  .btn { padding: 12px 20px; font-size: 14px; }
+}
+
+/* ==========================================================================
+   移动端触控与可访问性优化
+   ========================================================================== */
+/* 输入框字号 ≥16px，避免 iOS Safari 聚焦时自动缩放页面 */
+@media (max-width: 680px) {
+  .form-group input,
+  .form-group textarea,
+  .form-group select,
+  .ps-input {
+    font-size: 16px;
+  }
+}
+
+/* 触控目标最小尺寸，提升点击体验 */
+@media (max-width: 680px) {
+  .nav-links a,
+  .cat-tabs a,
+  .footer-links a,
+  .btn {
+    min-height: 44px;
+  }
 }

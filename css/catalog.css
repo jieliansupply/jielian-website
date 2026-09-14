@@ -156,8 +156,33 @@
 
 /* 响应式 */
 @media (max-width: 680px) {
-  .cat-section { padding: 24px 16px; }
+  .catalog-hero { padding: 36px 0 40px; }
+  .catalog-hero h1 { font-size: 26px; }
+  .catalog-hero p { font-size: 14.5px; }
+  .catalog-main { padding: 24px 0 56px; }
+  .cat-section { padding: 22px 14px; border-radius: 14px; }
   .cat-table thead th, .cat-table tbody td { padding: 8px 10px; }
   .cat-figure img { max-height: 360px; }
-  .cat-tabs { top: 70px; }
+  /* 分类 tab：横向滑动 */
+  .cat-tabs {
+    top: 70px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    margin: 0 -16px 24px;
+    padding: 10px 16px;
+    scroll-padding-left: 16px;
+  }
+  .cat-tabs::-webkit-scrollbar { display: none; }
+  .cat-tabs a {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 9px 16px;
+    font-size: 13.5px;
+  }
+  /* 型号表格：横向滚动（避免手机溢出） */
+  .cat-section:has(.cat-table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cat-table { min-width: 560px; }
 }
