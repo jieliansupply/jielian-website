@@ -197,12 +197,44 @@
           if (btn) { btn.disabled = false; btn.textContent = origText; }
         });
       } else {
-        // 未配置 EmailJS：回退到 mailto
-        var subject = t("wa_greet", "询盘（来自捷链供应链官网）");
-        var body = buildBody(f);
-        window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        // 未配置 EmailJS：复制邮箱 + 引导（不跳转 mailto，避免手机端体验差）
+        copyText(CONTACT_EMAIL, function () {});
+        showEmailGuide(f);
         if (btn) { btn.disabled = false; btn.textContent = origText; }
       }
+    }
+
+    // 邮箱引导弹层（复制邮箱 + 提示用邮件客户端发送；已填内容尽力复制）
+    function showEmailGuide(f) {
+      var old = document.getElementById("emailGuide");
+      if (old) old.remove();
+
+      var overlay = document.createElement("div");
+      overlay.id = "emailGuide";
+      overlay.className = "wa-guide";
+      overlay.innerHTML =
+        '<div class="wa-guide-card">' +
+          '<button class="wa-guide-close" aria-label="关闭">×</button>' +
+          '<h4>' + t("email_guide_title", "我们的邮箱，欢迎来信咨询") + '</h4>' +
+          '<div class="wa-guide-number">' + CONTACT_EMAIL + '</div>' +
+          '<div class="wa-guide-steps">' +
+            '<div class="wa-guide-step"><span>1</span><p>' + t("email_guide_s1", "复制邮箱地址") + '</p></div>' +
+            '<div class="wa-guide-step"><span>2</span><p>' + t("email_guide_s2", "打开你的邮箱 App，粘贴到收件人并发送") + '</p></div>' +
+          '</div>' +
+          '<div class="wa-guide-actions">' +
+            '<button class="btn btn-blue" id="emailCopyBtn">' + t("email_guide_copy", "复制邮箱") + '</button>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.remove(); });
+      overlay.querySelector(".wa-guide-close").addEventListener("click", function () { overlay.remove(); });
+      var copyBtn = overlay.querySelector("#emailCopyBtn");
+      copyBtn.addEventListener("click", function () {
+        copyText(CONTACT_EMAIL, function () {
+          copyBtn.textContent = t("email_guide_copied", "已复制 ✓");
+        });
+      });
     }
 
     // 通过 WhatsApp 发送：显示引导层（复制号码 + 打开 WhatsApp）
@@ -262,13 +294,14 @@
     });
   }
 
-  /* ---------- 邮箱防爬（base64 解码，避免爬虫抓取明文） ---------- */
+  /* ---------- 邮箱防爬（base64 解码显示文字；点击行为由 contact.js 统一处理为“复制邮箱”） ---------- */
   document.querySelectorAll("[data-mail]").forEach(function (el) {
     try {
       const email = atob(el.getAttribute("data-mail"));
-      el.href = "mailto:" + email;
       const prefix = el.textContent.trim();
-      el.textContent = prefix ? prefix + " " + email : email;
+      if (prefix === "✉️" || prefix === "✉" || prefix === "") {
+        el.textContent = "✉️ " + email;
+      }
     } catch (e) {}
   });
 

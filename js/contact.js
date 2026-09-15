@@ -19,12 +19,76 @@
     try { return atob(b64); } catch (e) { return null; }
   }
 
-  /* ---------- 1. 解码所有 base64 邮箱链接 ---------- */
+  /* ---------- 复制文本（兼容手机浏览器，带超时兜底） ---------- */
+  function copyText(text, onDone) {
+    var done = false;
+    var finish = function () { if (!done) { done = true; onDone && onDone(); } };
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      finish();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      var timer = setTimeout(fallback, 600);
+      navigator.clipboard.writeText(text).then(function () {
+        clearTimeout(timer); finish();
+      }, function () {
+        clearTimeout(timer); fallback();
+      });
+    } else {
+      fallback();
+    }
+  }
+
+  /* ---------- 邮箱引导弹层（复制邮箱 + 提示用邮件客户端发送） ---------- */
+  function showEmailGuide() {
+    var old = document.getElementById("emailGuide");
+    if (old) old.remove();
+
+    var overlay = document.createElement("div");
+    overlay.id = "emailGuide";
+    overlay.className = "wa-guide";
+    overlay.innerHTML =
+      '<div class="wa-guide-card">' +
+        '<button class="wa-guide-close" aria-label="关闭">×</button>' +
+        '<h4>我们的邮箱，欢迎来信咨询</h4>' +
+        '<div class="wa-guide-number">' + CONTACT.email + '</div>' +
+        '<div class="wa-guide-steps">' +
+          '<div class="wa-guide-step"><span>1</span><p>点击下方按钮复制邮箱地址</p></div>' +
+          '<div class="wa-guide-step"><span>2</span><p>打开你的邮箱 App，粘贴到收件人并发送</p></div>' +
+        '</div>' +
+        '<div class="wa-guide-actions">' +
+          '<button class="btn btn-blue" id="emailCopyBtn">复制邮箱</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.remove(); });
+    overlay.querySelector(".wa-guide-close").addEventListener("click", function () { overlay.remove(); });
+    var copyBtn = overlay.querySelector("#emailCopyBtn");
+    copyBtn.addEventListener("click", function () {
+      copyText(CONTACT.email, function () {
+        copyBtn.textContent = "已复制 ✓";
+      });
+    });
+  }
+
+  /* ---------- 1. 解码所有 base64 邮箱链接，改为点击复制邮箱 ---------- */
   var mailEls = document.querySelectorAll("[data-mail]");
   for (var i = 0; i < mailEls.length; i++) {
     var el = mailEls[i];
     var email = decodeEmail(el.getAttribute("data-mail")) || CONTACT.email;
-    el.href = "mailto:" + email;
+    el.href = "#";
+    el.setAttribute("aria-label", "复制邮箱 " + email);
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      showEmailGuide();
+    });
     var prefix = el.textContent.trim();
     if (prefix === "✉️" || prefix === "✉" || prefix === "") {
       el.textContent = "✉️ " + email;
@@ -41,7 +105,7 @@
       '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/></svg>' +
       '<span class="fab-label">WhatsApp</span>' +
     '</a>' +
-    '<a class="fab-btn fab-mail" href="mailto:' + CONTACT.email + '" aria-label="邮箱联系">' +
+    '<a class="fab-btn fab-mail" href="#" aria-label="复制邮箱">' +
       '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>' +
       '<span class="fab-label">' + CONTACT.email + '</span>' +
     '</a>' +
@@ -51,4 +115,10 @@
     '</a>';
 
   document.body.appendChild(fab);
+
+  // 邮箱按钮：点击复制邮箱 + 引导弹层（不跳转 mailto）
+  fab.querySelector(".fab-mail").addEventListener("click", function (e) {
+    e.preventDefault();
+    showEmailGuide();
+  });
 })();
