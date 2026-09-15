@@ -78,6 +78,50 @@
     });
   }
 
+  /* ---------- WhatsApp 引导弹层（复制号码 + 打开 WhatsApp + 复制预填内容） ---------- */
+  // 暴露为全局，供各目录页「咨询这款」按钮调用
+  function showWaGuide(body) {
+    var old = document.getElementById("waGuide");
+    if (old) old.remove();
+
+    var overlay = document.createElement("div");
+    overlay.id = "waGuide";
+    overlay.className = "wa-guide";
+    overlay.innerHTML =
+      '<div class="wa-guide-card">' +
+        '<button class="wa-guide-close" aria-label="关闭">×</button>' +
+        '<h4>已准备好咨询内容，接下来这样联系我：</h4>' +
+        '<div class="wa-guide-steps">' +
+          '<div class="wa-guide-step"><span>1</span><p>打开 WhatsApp</p></div>' +
+          '<div class="wa-guide-step"><span>2</span><p>添加我的号码并粘贴发送</p></div>' +
+        '</div>' +
+        '<div class="wa-guide-number">' + CONTACT.phoneDisplay + '</div>' +
+        '<div class="wa-guide-actions">' +
+          '<button class="btn btn-blue" id="waCopyAll">复制咨询内容</button>' +
+          '<button class="btn btn-green" id="waCopyNum">复制号码</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.remove(); });
+    overlay.querySelector(".wa-guide-close").addEventListener("click", function () { overlay.remove(); });
+
+    var copyNumBtn = overlay.querySelector("#waCopyNum");
+    copyNumBtn.addEventListener("click", function () {
+      copyText(CONTACT.whatsapp, function () {
+        copyNumBtn.textContent = "已复制 ✓";
+      });
+    });
+
+    var copyAllBtn = overlay.querySelector("#waCopyAll");
+    copyAllBtn.addEventListener("click", function () {
+      copyText(body || "", function () {
+        copyAllBtn.textContent = "已复制 ✓";
+      });
+    });
+  }
+  window.showWaGuide = showWaGuide;
+
   /* ---------- 1. 解码所有 base64 邮箱链接，改为点击复制邮箱 ---------- */
   var mailEls = document.querySelectorAll("[data-mail]");
   for (var i = 0; i < mailEls.length; i++) {
@@ -100,8 +144,7 @@
   fab.className = "contact-fab";
   fab.setAttribute("aria-label", "联系我们");
   fab.innerHTML =
-    '<a class="fab-btn fab-wa" href="https://wa.me/' + CONTACT.whatsapp +
-      '?text=' + encodeURIComponent("您好，我想咨询产品。") + '" target="_blank" rel="noopener" aria-label="WhatsApp 联系">' +
+    '<a class="fab-btn fab-wa" href="#" aria-label="WhatsApp 联系">' +
       '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/></svg>' +
       '<span class="fab-label">WhatsApp</span>' +
     '</a>' +
@@ -115,6 +158,12 @@
     '</a>';
 
   document.body.appendChild(fab);
+
+  // WhatsApp 按钮：弹出引导层（复制号码+内容，不跳转 wa.me）
+  fab.querySelector(".fab-wa").addEventListener("click", function (e) {
+    e.preventDefault();
+    showWaGuide("您好，我想咨询产品。");
+  });
 
   // 邮箱按钮：点击复制邮箱 + 引导弹层（不跳转 mailto）
   fab.querySelector(".fab-mail").addEventListener("click", function (e) {

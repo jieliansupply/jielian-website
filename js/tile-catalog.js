@@ -107,11 +107,8 @@
         var productName = (it.name && (it.name[lang] || it.name.zh)) ||
                           (it.color && (it.color[lang] || it.color.zh)) || "";
 
-        var waText = encodeURIComponent(
-          "Hello, I'm interested in your tile model " + it.model +
-          (productName ? " (" + productName + ")" : "") + ". Please send more details."
-        );
-        var waLink = WHATSAPP + "?text=" + waText;
+        var waText = "Hello, I'm interested in your tile model " + it.model +
+          (productName ? " (" + productName + ")" : "") + ". Please send more details.";
 
         // 动态拼装规格行（跳过不存在的字段）
         var rows = [];
@@ -134,7 +131,7 @@
           '<div class="tile-body">' +
             '<h3>' + it.model + (productName ? ' · ' + productName : '') + '</h3>' +
             '<div class="spec-list">' + rowsHtml + '</div>' +
-            '<a class="btn btn-green tile-cta" href="' + waLink + '" target="_blank" rel="noopener">' +
+            '<a class="btn btn-green tile-cta" href="#" data-wa="' + waText.replace(/"/g, '&quot;') + '">' +
               (I18N[lang].inquiry || "咨询这款") +
             '</a>' +
           '</div>';
@@ -200,4 +197,14 @@
   /* ---------- 页脚年份 ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+  /* ---------- 「咨询这款」按钮：弹出 WhatsApp 引导层（复制号码+内容，不跳转 wa.me） ---------- */
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest(".tile-cta[data-wa]");
+    if (!btn) return;
+    e.preventDefault();
+    var text = btn.getAttribute("data-wa") || "";
+    if (window.showWaGuide) {
+      window.showWaGuide(text);
+    }
+  });
 })();

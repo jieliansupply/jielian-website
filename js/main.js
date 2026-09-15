@@ -265,8 +265,8 @@
           '</div>' +
           '<div class="wa-guide-number">' + WHATSAPP_DISPLAY + '</div>' +
           '<div class="wa-guide-actions">' +
-            '<a class="btn btn-green" href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(body) + '" target="_blank" rel="noopener">' + t("wa_guide_open", "打开 WhatsApp") + '</a>' +
-            '<button class="btn btn-blue" id="waCopyNum">' + t("wa_guide_copy", "复制号码") + '</button>' +
+            '<button class="btn btn-blue" id="waCopyAll">' + t("wa_guide_copyall", "复制询盘内容") + '</button>' +
+            '<button class="btn btn-green" id="waCopyNum">' + t("wa_guide_copy", "复制号码") + '</button>' +
           '</div>' +
         '</div>';
       document.body.appendChild(overlay);
@@ -277,6 +277,12 @@
       copyNumBtn.addEventListener("click", function () {
         copyText(WHATSAPP_DISPLAY, function () {
           copyNumBtn.textContent = t("wa_guide_copied", "已复制 ✓");
+        });
+      });
+      var copyAllBtn = overlay.querySelector("#waCopyAll");
+      copyAllBtn.addEventListener("click", function () {
+        copyText(body || "", function () {
+          copyAllBtn.textContent = t("wa_guide_copied", "已复制 ✓");
         });
       });
     }
