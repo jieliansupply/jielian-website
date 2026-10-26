@@ -1,450 +1,261 @@
-/* ==========================================================================
-   捷链供应链 - 前端交互脚本
-   ========================================================================== */
-(function () {
-  "use strict";
+// ==================== 捷链认养 · 交互逻辑 ====================
 
-  /* ---------- 移动端导航开关 ---------- */
-  const navToggle = document.getElementById("navToggle");
-  const navLinks = document.getElementById("navLinks");
-  if (navToggle && navLinks) {
-    navToggle.addEventListener("click", function () {
-      navLinks.classList.toggle("open");
-    });
-    // 点击导航项后收起
-    navLinks.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        navLinks.classList.remove("open");
-      });
-    });
-  }
+// 中英文文案映射
+const I18N = {
+  zh: {
+    top_tagline: '🌱 认养一只土鸡 · 云监控全程可溯源',
+    nav_home: '首页',
+    nav_about: '为什么认养',
+    nav_product: '认养土鸡',
+    nav_live: '云监控',
+    nav_flow: '认养流程',
+    nav_farm: '我们的农场',
+    nav_order: '立即认养',
+    hero_badge: '🐔 认养一只属于自己的土鸡',
+    hero_title: '认养一只林下散养土鸡<br>专属直播间随时看鸡',
+    hero_lead: '认养一只正宗林下散养土鸡，农户全程代养，绑定专属直播间随时视频看鸡，出栏后宰杀冷链直送到家。全程可溯源，吃得放心。',
+    hero_cta1: '认养一只土鸡',
+    hero_cta2: '看看云监控直播',
+    hero_live: 'LIVE · 云农场实时画面',
+    stat1: '认养一只/季',
+    stat2: '专属直播看鸡',
+    stat3: '宰杀直送到家',
+    stat4: '全程可追溯',
+    about_eyebrow: 'Why Adopt',
+    about_title: '为什么认养一只土鸡？',
+    about_sub: '不是买一只鸡，而是全程参与它的成长，吃得明白、吃得放心。',
+    f1_t: '专属直播间',
+    f1_d: '绑定专属摄像头，24 小时随时视频看鸡，看到它吃粮、散步、长大。',
+    f2_t: '林下散养',
+    f2_d: '正宗林下散养，粮食喂养，不催肥、不打激素，肉质紧实鲜美。',
+    f3_t: '冷链直送',
+    f3_d: '出栏后现宰现发，冷链锁鲜配送到家，新鲜到舌头。',
+    f4_t: '全程溯源',
+    f4_d: '从认养到餐桌，每一只鸡都有档案，成长节点清晰可见。',
+    prod_eyebrow: 'Adopt Now',
+    prod_title: '认养一只林下散养土鸡',
+    prod_sub: '正宗清远林下散养土鸡，农户全程代养，专属直播间随时看鸡。',
+    prod_hot: '🔥 热销认养',
+    prod_tag1: '专属直播间',
+    prod_tag2: '全程散养',
+    prod_tag3: '半年认养',
+    prod_name: '林下散养土鸡 · 认养',
+    prod_desc: '认养一只正宗林下散养土鸡，农户全程代养，绑定专属直播间随时视频看鸡，出栏后宰杀冷链直送到家。',
+    prod_unit: '/ 只 · 一季',
+    prod_stock: '库存 120 只',
+    prod_cta: '立即认养这只土鸡',
+    meta_farm: '农场',
+    meta_loc: '产地',
+    meta_loc_v: '广东清远',
+    meta_sold: '已认养',
+    live_eyebrow: 'Cloud Monitor',
+    live_title: '云监控 · 专属直播间',
+    live_sub: '认养后绑定专属摄像头，24 小时实时看鸡，看得见的放心。',
+    live1_t: '专属鸡棚直播',
+    live1_d: '每只认养的鸡都绑定专属摄像头，随时看到它在鸡棚里的实时画面。',
+    live2_t: '云农场全景',
+    live2_d: '总直播看整个农场全景，感受真实的林下散养环境。',
+    live3_t: '成长节点提醒',
+    live3_d: '出栏、配送等关键节点主动提醒，成长进度一目了然。',
+    flow_eyebrow: 'How It Works',
+    flow_title: '认养流程',
+    flow_sub: '四步轻松认养，坐等土鸡长大送到家。',
+    step1_t: '下单认养',
+    step1_d: '选择认养数量，提交认养意向，完成支付。',
+    step2_t: '绑定直播间',
+    step2_d: '系统自动分配专属摄像头，随时视频看鸡。',
+    step3_t: '农户代养',
+    step3_d: '农户粮食喂养，林下散养，全程可溯源。',
+    step4_t: '冷链到家',
+    step4_d: '出栏现宰现发，冷链锁鲜直送到家。',
+    farm_title: '王叔生态农场',
+    farm_p1: '位于广东清远，返乡创业 8 年，专做林下散养土鸡，坚持粮食喂养，不催肥、不打激素。',
+    farm_p2: '农场配备专属直播间与云监控系统，每一只认养的鸡都能被认养人实时看到，让「看得见的放心」成为现实。',
+    farm_pt1: '金牌农场认证',
+    farm_pt2: '林下散养 8 年',
+    farm_pt3: '专属直播间 + 云监控',
+    farm_badge: '农场评分<br>328 单认养',
+    order_eyebrow: 'Order Now',
+    order_title: '认养一只土鸡',
+    order_sub: '填写认养意向，我们的客服会尽快联系您完成认养。',
+    sum_title: '您认养的',
+    prod_name2: '林下散养土鸡 · 认养',
+    sum_note: '认养后可绑定专属直播间，出栏冷链直送到家。',
+    f_name: '您的姓名 *',
+    f_phone: '联系电话 *',
+    f_count: '认养数量',
+    f_city: '所在城市',
+    f_msg: '备注（可选）',
+    f_btn: '提交认养意向',
+    foot_desc: '捷链供应链管理（广东）有限公司旗下认养平台，认养一只土鸡，看得见的放心。',
+    foot_links: '快速链接',
+    foot_contact: '联系方式',
+    foot_addr: '广州市海珠区江南大道中路173号六楼',
+    foot_copyright: '捷链供应链管理（广东）有限公司 · Jielian Supply Chain Management (Guangdong) Co., Ltd.',
+  },
+  en: {
+    top_tagline: '🌱 Adopt a chicken · Cloud-monitored, fully traceable',
+    nav_home: 'Home',
+    nav_about: 'Why Adopt',
+    nav_product: 'Adopt a Chicken',
+    nav_live: 'Cloud Monitor',
+    nav_flow: 'How It Works',
+    nav_farm: 'Our Farm',
+    nav_order: 'Adopt Now',
+    hero_badge: '🐔 Adopt a chicken of your own',
+    hero_title: 'Adopt a Free-range Chicken<br>Watch it live anytime',
+    hero_lead: 'Adopt an authentic free-range chicken. Our farmers raise it for you, bound to a private live stream so you can watch it grow. Slaughtered and cold-chain delivered to your door at maturity.',
+    hero_cta1: 'Adopt a Chicken',
+    hero_cta2: 'View Live Stream',
+    hero_live: 'LIVE · Cloud farm real-time feed',
+    stat1: 'Per chicken/season',
+    stat2: 'Private live stream',
+    stat3: 'Cold-chain delivery',
+    stat4: 'Fully traceable',
+    about_eyebrow: 'Why Adopt',
+    about_title: 'Why adopt a chicken?',
+    about_sub: 'Not just buying a chicken — you participate in its growth, knowing exactly what you eat.',
+    f1_t: 'Private Live Stream',
+    f1_d: 'Bound to a private camera, watch your chicken eat, roam and grow 24/7.',
+    f2_t: 'Free-range',
+    f2_d: 'Authentic forest free-range, grain-fed, no hormones, firm and flavorful meat.',
+    f3_t: 'Cold-chain Delivery',
+    f3_d: 'Slaughtered and shipped fresh at maturity, cold-chain sealed to your door.',
+    f4_t: 'Full Traceability',
+    f4_d: 'Every chicken has a record from adoption to table, with clear growth milestones.',
+    prod_eyebrow: 'Adopt Now',
+    prod_title: 'Adopt a Free-range Chicken',
+    prod_sub: 'Authentic Qingyuan forest free-range chicken, farmer-raised with a private live stream.',
+    prod_hot: '🔥 Best Seller',
+    prod_tag1: 'Private live stream',
+    prod_tag2: 'Free-range',
+    prod_tag3: 'Half-year adoption',
+    prod_name: 'Free-range Chicken · Adoption',
+    prod_desc: 'Adopt an authentic forest free-range chicken. Farmers raise it, bound to a private live stream, slaughtered and cold-chain delivered at maturity.',
+    prod_unit: '/ chicken · season',
+    prod_stock: '120 in stock',
+    prod_cta: 'Adopt This Chicken Now',
+    meta_farm: 'Farm',
+    meta_loc: 'Origin',
+    meta_loc_v: 'Qingyuan, Guangdong',
+    meta_sold: 'Adopted',
+    live_eyebrow: 'Cloud Monitor',
+    live_title: 'Cloud Monitor · Private Live Stream',
+    live_sub: 'Bound to a private camera after adoption — 24/7 real-time view, visible peace of mind.',
+    live1_t: 'Private Coop Stream',
+    live1_d: 'Each adopted chicken is bound to a private camera, watch its real-time feed anytime.',
+    live2_t: 'Cloud Farm Panorama',
+    live2_d: 'A general stream shows the whole farm, experiencing the real free-range environment.',
+    live3_t: 'Milestone Reminders',
+    live3_d: 'Proactive reminders at key stages like maturity and delivery — progress at a glance.',
+    flow_eyebrow: 'How It Works',
+    flow_title: 'Adoption Process',
+    flow_sub: 'Four easy steps — sit back and wait for your chicken to arrive.',
+    step1_t: 'Place Order',
+    step1_d: 'Choose quantity, submit your adoption intent, complete payment.',
+    step2_t: 'Bind Live Stream',
+    step2_d: 'System auto-assigns a private camera to watch your chicken.',
+    step3_t: 'Farmer Raises',
+    step3_d: 'Grain-fed, forest free-range, fully traceable.',
+    step4_t: 'Cold-chain Delivery',
+    step4_d: 'Slaughtered fresh at maturity, cold-chain delivered to your door.',
+    farm_title: 'Uncle Wang Eco Farm',
+    farm_p1: 'Located in Qingyuan, Guangdong. 8 years of returning-home entrepreneurship, specializing in forest free-range chickens, grain-fed with no hormones.',
+    farm_p2: 'The farm is equipped with private live streams and a cloud monitoring system — every adopted chicken is visible in real time, making "visible peace of mind" a reality.',
+    farm_pt1: 'Gold Farm Certification',
+    farm_pt2: '8 Years Free-range',
+    farm_pt3: 'Private live stream + cloud monitor',
+    farm_badge: 'Farm rating<br>328 adoptions',
+    order_eyebrow: 'Order Now',
+    order_title: 'Adopt a Chicken',
+    order_sub: 'Fill in your adoption intent, our team will contact you shortly.',
+    sum_title: 'Your adoption',
+    prod_name2: 'Free-range Chicken · Adoption',
+    sum_note: 'Bound to a private live stream after adoption, cold-chain delivered at maturity.',
+    f_name: 'Your Name *',
+    f_phone: 'Phone *',
+    f_count: 'Quantity',
+    f_city: 'City',
+    f_msg: 'Notes (optional)',
+    f_btn: 'Submit Adoption Intent',
+    foot_desc: 'An adoption platform under Jielian Supply Chain Management (Guangdong) Co., Ltd. Adopt a chicken, visible peace of mind.',
+    foot_links: 'Quick Links',
+    foot_contact: 'Contact',
+    foot_addr: '6/F, No. 173, Middle Jiangnan Avenue, Haizhu District, Guangzhou',
+    foot_copyright: 'Jielian Supply Chain Management (Guangdong) Co., Ltd.',
+  },
+};
 
-  /* ---------- 语言切换（中英） ---------- */
-  const langButtons = document.querySelectorAll(".lang-switch button");
-  const applyLang = function (lang) {
-    document.documentElement.setAttribute("lang", lang);
-    document.querySelectorAll("[data-lang]").forEach(function (el) {
-      const key = el.getAttribute("data-lang");
-      if (window.I18N && window.I18N[lang] && window.I18N[lang][key] !== undefined) {
-        el.textContent = window.I18N[lang][key];
-      }
-    });
-    langButtons.forEach(function (btn) {
-      btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === lang);
-    });
-    try {
-      localStorage.setItem("jielian_lang", lang);
-    } catch (e) {}
-    // 通知 data.js 刷新产品卡片
-    document.dispatchEvent(new CustomEvent("langchanged", { detail: lang }));
-  };
+let currentLang = 'zh';
 
-  langButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      applyLang(btn.getAttribute("data-lang-btn"));
-    });
+// 语言切换
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (I18N[lang] && I18N[lang][key] !== undefined) {
+      el.innerHTML = I18N[lang][key];
+    }
   });
-
-  /* ---------- 恢复上次语言选择 / 自动判断浏览器语言 ---------- */
-  let savedLang = null;
-  try { savedLang = localStorage.getItem("jielian_lang"); } catch (e) {}
-  if (savedLang === "zh" || savedLang === "en") {
-    applyLang(savedLang);
-  } else {
-    // 根据浏览器语言自动判断：中文环境默认中文，否则英文
-    const nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-    applyLang(nav.indexOf("zh") === 0 ? "zh" : "en");
-  }
-
-  /* ---------- 滚动高亮当前导航 ---------- */
-  const sections = document.querySelectorAll("section[id]");
-  const navAnchors = document.querySelectorAll(".nav-links a[href^='#']");
-  const scrollSpy = function () {
-    let current = "";
-    sections.forEach(function (sec) {
-      const top = sec.offsetTop - 120;
-      if (window.scrollY >= top) current = sec.id;
-    });
-    navAnchors.forEach(function (a) {
-      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
-    });
-  };
-  window.addEventListener("scroll", scrollSpy, { passive: true });
-  scrollSpy();
-
-  /* ---------- 滚动进入视口动画 ---------- */
-  const revealEls = document.querySelectorAll("[data-reveal]");
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add("revealed"); });
-  }
-
-  /* ---------- 联系表单（跳转 WhatsApp 发送询盘） ---------- */
-  const WHATSAPP_NUMBER = "8618565728237"; // 不带 + 号
-  const WHATSAPP_DISPLAY = "+86 185 6572 8237";
-  const CONTACT_EMAIL = "postmaster@jieliansupply.com";
-  const form = document.getElementById("contactForm");
-  const formStatus = document.getElementById("formStatus");
-  if (form) {
-    const t = function (k, fallback) {
-      return window.I18N && window.I18N[document.documentElement.lang]
-        ? (window.I18N[document.documentElement.lang][k] || fallback) : fallback;
-    };
-
-    // 校验并读取表单字段
-    function readForm() {
-      return {
-        name: form.querySelector("#name").value.trim(),
-        email: form.querySelector("#email").value.trim(),
-        message: form.querySelector("#message").value.trim(),
-        phone: form.querySelector("#phone").value.trim(),
-        country: form.querySelector("#country").value.trim()
-      };
-    }
-
-    // 组装询盘正文（邮箱 / WhatsApp 共用）
-    function buildBody(f) {
-      const lines = [];
-      lines.push(t("wa_greet", "询盘（来自捷链供应链官网）"));
-      lines.push(t("wa_name", "姓名") + ": " + f.name);
-      if (f.email) lines.push(t("wa_email", "邮箱") + ": " + f.email);
-      if (f.phone) lines.push(t("wa_phone", "电话") + ": " + f.phone);
-      if (f.country) lines.push(t("wa_country", "国家/地区") + ": " + f.country);
-      lines.push("");
-      lines.push(t("wa_req", "需求描述") + ": " + f.message);
-      return lines.join("\n");
-    }
-
-    function validate(f) {
-      if (!f.name || !f.message) {
-        formStatus.textContent = t("form_fill", "请填写姓名与需求描述");
-        formStatus.style.color = "#cf2e2e";
-        return false;
-      }
-      return true;
-    }
-
-    // 复制文本到剪贴板（兼容手机浏览器，带超时兜底）
-    function copyText(text, onDone) {
-      var done = false;
-      var finish = function () { if (!done) { done = true; onDone(); } };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        var timer = setTimeout(function () { fallbackCopy(text, finish); }, 600);
-        navigator.clipboard.writeText(text).then(function () {
-          clearTimeout(timer); finish();
-        }, function () {
-          clearTimeout(timer); fallbackCopy(text, finish);
-        });
-      } else {
-        fallbackCopy(text, finish);
-      }
-    }
-    function fallbackCopy(text, onDone) {
-      var ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand("copy"); } catch (e) {}
-      document.body.removeChild(ta);
-      onDone();
-    }
-
-    // 通过邮箱发送（EmailJS 后端直发）
-    function sendByEmail(f) {
-      var btn = form.querySelector('button[data-via="email"]');
-      var origText = btn ? btn.textContent : "";
-      if (btn) { btn.disabled = true; btn.textContent = t("form_sending", "发送中…"); }
-
-      // EmailJS 后端（配置后自动启用）
-      if (window.EMAILJS && window.EMAILJS.publicKey && window.EMAILJS.serviceId && window.EMAILJS.templateId) {
-        var payload = {
-          name: f.name,
-          email: f.email || t("wa_none", "未填写"),
-          phone: f.phone || t("wa_none", "未填写"),
-          country: f.country || t("wa_none", "未填写"),
-          message: f.message
-        };
-        fetch("https://api.emailjs.com/api/v1.0/email/send", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            service_id: window.EMAILJS.serviceId,
-            template_id: window.EMAILJS.templateId,
-            user_id: window.EMAILJS.publicKey,
-            template_params: payload
-          })
-        }).then(function (resp) {
-          if (resp.ok) {
-            formStatus.textContent = t("form_ok_email", "已发送成功！我们会尽快回复您。");
-            formStatus.style.color = "#0f9d58";
-          } else {
-            throw new Error("send fail");
-          }
-        }).catch(function () {
-          formStatus.textContent = t("form_err", "发送失败，请稍后重试或直接邮件联系我们。");
-          formStatus.style.color = "#cf2e2e";
-        }).finally(function () {
-          if (btn) { btn.disabled = false; btn.textContent = origText; }
-        });
-      } else {
-        // 未配置 EmailJS：复制邮箱 + 引导（不跳转 mailto，避免手机端体验差）
-        copyText(CONTACT_EMAIL, function () {});
-        showEmailGuide(f);
-        if (btn) { btn.disabled = false; btn.textContent = origText; }
-      }
-    }
-
-    // 邮箱引导弹层（复制邮箱 + 提示用邮件客户端发送；已填内容尽力复制）
-    function showEmailGuide(f) {
-      var old = document.getElementById("emailGuide");
-      if (old) old.remove();
-
-      var overlay = document.createElement("div");
-      overlay.id = "emailGuide";
-      overlay.className = "wa-guide";
-      overlay.innerHTML =
-        '<div class="wa-guide-card">' +
-          '<button class="wa-guide-close" aria-label="关闭">×</button>' +
-          '<h4>' + t("email_guide_title", "我们的邮箱，欢迎来信咨询") + '</h4>' +
-          '<div class="wa-guide-number">' + CONTACT_EMAIL + '</div>' +
-          '<div class="wa-guide-steps">' +
-            '<div class="wa-guide-step"><span>1</span><p>' + t("email_guide_s1", "复制邮箱地址") + '</p></div>' +
-            '<div class="wa-guide-step"><span>2</span><p>' + t("email_guide_s2", "打开你的邮箱 App，粘贴到收件人并发送") + '</p></div>' +
-          '</div>' +
-          '<div class="wa-guide-actions">' +
-            '<button class="btn btn-blue" id="emailCopyBtn">' + t("email_guide_copy", "复制邮箱") + '</button>' +
-          '</div>' +
-        '</div>';
-      document.body.appendChild(overlay);
-
-      overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.remove(); });
-      overlay.querySelector(".wa-guide-close").addEventListener("click", function () { overlay.remove(); });
-      var copyBtn = overlay.querySelector("#emailCopyBtn");
-      copyBtn.addEventListener("click", function () {
-        copyText(CONTACT_EMAIL, function () {
-          copyBtn.textContent = t("email_guide_copied", "已复制 ✓");
-        });
-      });
-    }
-
-    // 通过 WhatsApp 发送：显示引导层（复制号码 + 打开 WhatsApp）
-    function sendByWhatsApp(f) {
-      var body = buildBody(f);
-      // 先立即显示引导弹层，不阻塞
-      showWaGuide(body);
-      // 尽力复制内容到剪贴板（失败不影响弹层展示）
-      copyText(body, function () {});
-    }
-
-    // WhatsApp 引导弹层
-    function showWaGuide(body) {
-      // 移除旧弹层
-      var old = document.getElementById("waGuide");
-      if (old) old.remove();
-
-      var overlay = document.createElement("div");
-      overlay.id = "waGuide";
-      overlay.className = "wa-guide";
-      overlay.innerHTML =
-        '<div class="wa-guide-card">' +
-          '<button class="wa-guide-close" aria-label="关闭">×</button>' +
-          '<h4>' + t("wa_guide_title", "已复制询盘内容，接下来这样联系我：") + '</h4>' +
-          '<div class="wa-guide-steps">' +
-            '<div class="wa-guide-step"><span>1</span><p>' + t("wa_guide_s1", "打开 WhatsApp") + '</p></div>' +
-            '<div class="wa-guide-step"><span>2</span><p>' + t("wa_guide_s2", "添加我的号码并粘贴发送") + '</p></div>' +
-          '</div>' +
-          '<div class="wa-guide-number">' + WHATSAPP_DISPLAY + '</div>' +
-          '<div class="wa-guide-actions">' +
-            '<button class="btn btn-blue" id="waCopyAll">' + t("wa_guide_copyall", "复制询盘内容") + '</button>' +
-            '<button class="btn btn-green" id="waCopyNum">' + t("wa_guide_copy", "复制号码") + '</button>' +
-          '</div>' +
-        '</div>';
-      document.body.appendChild(overlay);
-
-      overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.remove(); });
-      overlay.querySelector(".wa-guide-close").addEventListener("click", function () { overlay.remove(); });
-      var copyNumBtn = overlay.querySelector("#waCopyNum");
-      copyNumBtn.addEventListener("click", function () {
-        copyText(WHATSAPP_DISPLAY, function () {
-          copyNumBtn.textContent = t("wa_guide_copied", "已复制 ✓");
-        });
-      });
-      var copyAllBtn = overlay.querySelector("#waCopyAll");
-      copyAllBtn.addEventListener("click", function () {
-        copyText(body || "", function () {
-          copyAllBtn.textContent = t("wa_guide_copied", "已复制 ✓");
-        });
-      });
-    }
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const f = readForm();
-      if (!validate(f)) return;
-      const via = e.submitter && e.submitter.getAttribute("data-via");
-      if (via === "email") {
-        sendByEmail(f);
-      } else {
-        sendByWhatsApp(f);
-      }
-    });
-  }
-
-  /* ---------- 邮箱防爬（base64 解码显示文字；点击行为由 contact.js 统一处理为“复制邮箱”） ---------- */
-  document.querySelectorAll("[data-mail]").forEach(function (el) {
-    try {
-      const email = atob(el.getAttribute("data-mail"));
-      const prefix = el.textContent.trim();
-      if (prefix === "✉️" || prefix === "✉" || prefix === "") {
-        el.textContent = "✉️ " + email;
-      }
-    } catch (e) {}
+  // 语言按钮高亮
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
+  // 更新 html lang
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  localStorage.setItem('jielian_lang', lang);
+}
 
-  /* ---------- 页脚年份 ---------- */
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ==========================================================================
-     首页产品搜索框（指引客户搜感兴趣的产品并直接展示）
-     ========================================================================== */
-  const psInput = document.getElementById("psInput");
-  if (psInput) {
-    const psClear = document.getElementById("psClear");
-    const psResults = document.getElementById("psResults");
-    const psChips = document.getElementById("psChips");
-
-    // 复用 data.js 里的图标（映射与 data.js 保持一致）
-    const PS_ICON = {
-      bath: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M6 12V5a2 2 0 0 1 2-2h1.5M21 12V8"/></svg>',
-      tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2-2z"/></svg>',
-      cable: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3c4 8 12 8 16 0"/><path d="M4 9c4 6 12 6 16 0"/><path d="M4 15c4 4 12 4 16 0"/></svg>',
-      bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>',
-      bulb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>',
-      layout: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>',
-      box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>',
-      shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-      wind: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.5 8a2.5 2.5 0 1 1 2.4 3H2"/></svg>',
-      hardhat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 15V6a2 2 0 1 1 4 0v9"/><path d="M2 15a10 10 0 0 1 20 0"/></svg>',
-      wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2-2z"/></svg>'
-    };
-
-    const currentLang = function () {
-      const l = document.documentElement.getAttribute("lang") || "en";
-      return l === "zh" ? "zh" : "en";
-    };
-
-    const applyPlaceholder = function () {
-      const l = currentLang();
-      psInput.placeholder = psInput.getAttribute(l === "zh" ? "data-ph-zh" : "data-ph-en");
-    };
-
-    // 快捷分类 chips：取前几个有代表性的分类（有目录页的优先 + 常用）
-    const CHIP_KEYS = ["sanitary", "tiles", "powertools", "lights", "hardware", "cables", "electrical"];
-    const renderChips = function () {
-      const l = currentLang();
-      psChips.innerHTML = "";
-      CHIP_KEYS.forEach(function (k) {
-        const p = (window.PRODUCTS || []).find(function (x) { return x.key === k; });
-        if (!p) return;
-        const txt = p[l] || p.en;
-        const chip = document.createElement("button");
-        chip.type = "button";
-        chip.className = "ps-chip";
-        chip.textContent = txt.name;
-        chip.addEventListener("click", function () {
-          psInput.value = txt.name;
-          runSearch(txt.name);
-        });
-        psChips.appendChild(chip);
-      });
-    };
-
-    const runSearch = function (q) {
-      const l = currentLang();
-      q = (q || "").trim().toLowerCase();
-      psClear.classList.toggle("show", !!q);
-      if (!q) {
-        psResults.hidden = true;
-        psResults.innerHTML = "";
-        return;
-      }
-      const list = window.PRODUCTS || [];
-      const matches = [];
-      list.forEach(function (p) {
-        const zh = p.zh || {};
-        const en = p.en || {};
-        const haystack = [
-          zh.name, zh.desc, (zh.tags || []).join(" "),
-          en.name, en.desc, (en.tags || []).join(" ")
-        ].join(" ").toLowerCase();
-        if (haystack.indexOf(q) !== -1) matches.push(p);
-      });
-
-      psResults.innerHTML = "";
-      if (matches.length === 0) {
-        psResults.innerHTML = '<div class="ps-empty">' +
-          (l === "zh" ? "没有找到匹配的产品，试试其他关键词，或直接联系我们获取更多产品。" : "No matching products. Try another keyword, or contact us for more.") +
-          "</div>";
-      } else {
-        matches.forEach(function (p) {
-          const txt = p[l] || p.en;
-          const go = l === "zh" ? "查看 →" : "View →";
-          const row = document.createElement("div");
-          row.className = "ps-result";
-          row.innerHTML =
-            '<span class="ic">' + (PS_ICON[p.icon] || PS_ICON.box) + "</span>" +
-            '<span class="t"><span class="n">' + txt.name + '</span><span class="d">' + txt.desc + "</span></span>" +
-            '<span class="go">' + go + "</span>";
-          row.addEventListener("click", function () {
-            if (p.link) { window.location.href = p.link; }
-            else {
-              document.getElementById("products").scrollIntoView({ behavior: "smooth" });
-              hideResults();
-            }
-          });
-          psResults.appendChild(row);
-        });
-      }
-      psResults.hidden = false;
-    };
-
-    const hideResults = function () {
-      psResults.hidden = true;
-    };
-
-    psInput.addEventListener("input", function () { runSearch(psInput.value); });
-    psInput.addEventListener("focus", function () { if (psInput.value.trim()) runSearch(psInput.value); });
-    psClear.addEventListener("click", function () {
-      psInput.value = "";
-      runSearch("");
-      psInput.focus();
+// 移动端菜单
+function initMenu() {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => links.classList.remove('open'));
     });
-
-    // 点击搜索框外关闭结果
-    document.addEventListener("click", function (e) {
-      const box = document.getElementById("productSearch");
-      if (box && !box.contains(e.target)) hideResults();
-    });
-
-    // 语言切换时重绘 chips / placeholder / 结果
-    document.addEventListener("langchanged", function () {
-      applyPlaceholder();
-      renderChips();
-      if (psInput.value.trim()) runSearch(psInput.value);
-    });
-
-    applyPlaceholder();
-    renderChips();
   }
-})();
+}
+
+// 下单表单
+function initOrderForm() {
+  const form = document.getElementById('orderForm');
+  const status = document.getElementById('formStatus');
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !phone) {
+      status.className = 'form-note error';
+      status.textContent = currentLang === 'zh'
+        ? '请填写姓名和联系电话'
+        : 'Please fill in your name and phone';
+      return;
+    }
+    // 拼接认养意向，跳转微信/短信或直接提示（无后端时引导拨打电话）
+    const count = document.getElementById('count').value;
+    const city = document.getElementById('city').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    const summary = `认养意向：${count} 只土鸡\n姓名：${name}\n电话：${phone}${city ? '\n城市：' + city : ''}${msg ? '\n备注：' + msg : ''}`;
+    status.className = 'form-note';
+    status.textContent = currentLang === 'zh'
+      ? '✅ 已记录您的认养意向，客服将尽快联系您！也可直接拨打 185 6572 8237'
+      : '✅ Your adoption intent is recorded, we will contact you soon! Or call 185 6572 8237';
+    console.log(summary);
+    form.reset();
+  });
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('jielian_lang');
+  setLang(saved === 'en' ? 'en' : 'zh');
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+  });
+  initMenu();
+  initOrderForm();
+  document.getElementById('year').textContent = new Date().getFullYear();
+});
